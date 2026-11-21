@@ -1,0 +1,56 @@
+
+/* =====================================================
+   SYSTEM INTEGRATION HERO
+   Video Right Position — Final Fix
+   Scoped ONLY to System Integration
+===================================================== */
+
+@media (min-width: 1024px) {
+
+  .integration-hero .service-hero-video {
+    /* Amount of rightward movement */
+    --integration-video-shift: clamp(80px, 8vw, 150px);
+
+    position: relative !important;
+
+    /* Reduce width to preserve the complete video */
+    width: calc(100% - var(--integration-video-shift)) !important;
+
+    height: 100% !important;
+    max-width: none !important;
+
+    /* Move video right */
+    transform: translateX(var(--integration-video-shift)) !important;
+
+    /* Display the complete video */
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    /* Remove temporary debugging outline */
+    outline: none !important;
+  }
+
+}
+
+/* =====================================================
+   TABLET & MOBILE — KEEP ORIGINAL LAYOUT
+===================================================== */
+
+@media (max-width: 1023px) {
+
+  .integration-hero .service-hero-video {
+    --integration-video-shift: 0px;
+
+    position: relative !important;
+    width: 100% !important;
+    height: clamp(15rem, 55vw, 24rem) !important;
+
+    transform: none !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+
+    outline: none !important;
+  }
+
+}

@@ -6,6 +6,7 @@ import { ServiceItem } from '../../types';
 import { Breadcrumbs } from './Breadcrumbs';
 import { ScrollRevealText } from './ScrollRevealText';
 import { ServiceHeroMedia } from './ServiceHeroMedia';
+import './SystemIntegrationHero.css';
 
 export const SystemIntegrationHero: React.FC<{ service: ServiceItem }> = ({ service }) => {
   const reducedMotion = useReducedMotion();
