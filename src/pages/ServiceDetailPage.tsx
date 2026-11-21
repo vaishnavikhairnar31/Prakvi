@@ -41,7 +41,6 @@ import {
   ArrowUpRight,
   CheckCircle2,
   ChevronDown,
-<<<<<<< Updated upstream
   Database,
   FileText,
   Laptop,
@@ -56,8 +55,6 @@ import {
   TrendingUp,
   Users,
   Zap,
-=======
->>>>>>> Stashed changes
 } from 'lucide-react';
 import './MobileAppDevelopmentHero.css';
 import './DigitalMarketingHero.css';
@@ -211,11 +208,7 @@ export const ServiceDetailPage: React.FC = () => {
   useEffect(() => {
     setActiveStackTab(0);
     setOpenFaqIndex(0);
-<<<<<<< Updated upstream
-    setMobilityTab('byod');
     setIsAnalyticsAutoPlaying(!reducedMotion);
-=======
->>>>>>> Stashed changes
     const stepCount = service?.deliverySteps.length ?? 0;
     setActiveAnalyticsStep(
       service?.slug === 'business-analytics' && stepCount > 0
@@ -238,9 +231,17 @@ export const ServiceDetailPage: React.FC = () => {
     return <BusinessIntelligencePage service={service} />;
   }
   const isMobilityPage = service.slug === 'mobility-practice';
-<<<<<<< Updated upstream
   const isEnterpriseArchitecturePage = service.slug === 'enterprise-architecture';
-  const hasDedicatedServiceSections = standardizedServiceSlugs.has(service.slug) && !isEnterpriseArchitecturePage;
+  const isInfrastructurePage = service.slug === 'infrastructure-management';
+  const animateServiceHeadings = cloudServicesHero || isInfrastructurePage;
+  const hasDedicatedServiceSections = standardizedServiceSlugs.has(service.slug)
+    && !isEnterpriseArchitecturePage
+    && !cloudServicesHero
+    && !isInfrastructurePage;
+  const showStandardServiceSections = !hasDedicatedServiceSections
+    && !isEnterpriseArchitecturePage
+    && !cloudServicesHero
+    && !isInfrastructurePage;
   const isTargetSectionRemovalPage =
     service.slug === 'it-consulting'
     || service.slug === 'web-design'
@@ -249,55 +250,11 @@ export const ServiceDetailPage: React.FC = () => {
   const offeringsDescription = service.offeringsSubtitle ||
     'Comprehensive service modules engineered for reliability, compliance, and long-term performance.';
   const processTitle = service.processTitle || `Why Choose Prakvi for ${service.title}?`;
-  const processDescription = service.processSubtitle || 'A proven methodology that ensures successful project delivery.';
+  const processDescription = service.processSubtitle ||
+    'A proven methodology that ensures successful project delivery.';
   const servicePageClass = isEnterpriseArchitecturePage
     ? 'ea-service-page'
     : `service-detail-page service-topic-${service.slug}`;
-=======
-
-const isEnterpriseArchitecturePage =
-  service.slug === 'enterprise-architecture';
-
-const isInfrastructurePage =
-  service.slug === 'infrastructure-management';
-
-const animateServiceHeadings =
-  cloudServicesHero || isInfrastructurePage;
-
-const hasDedicatedServiceSections =
-  standardizedServiceSlugs.has(service.slug) &&
-  !isEnterpriseArchitecturePage &&
-  !cloudServicesHero &&
-  !isInfrastructurePage;
-
-const showStandardServiceSections =
-  !hasDedicatedServiceSections &&
-  !isEnterpriseArchitecturePage &&
-  !cloudServicesHero &&
-  !isInfrastructurePage;
-
-const offeringsTitle =
-  service.offeringsTitle || `${service.title} Offerings`;
-
-const offeringsDescription =
-  service.offeringsSubtitle ||
-  'Comprehensive service modules engineered for reliability, compliance, and long-term performance.';
-
-const processTitle =
-  service.processTitle ||
-  `Why Choose Prakvi for ${service.title}?`;
-
-const processDescription =
-  service.processSubtitle ||
-  'A proven methodology that ensures successful project delivery.';
-
-const isBusinessAnalyticsPage =
-  service.slug === 'business-analytics';
-
-const servicePageClass = isEnterpriseArchitecturePage
-  ? 'ea-service-page'
-  : `service-detail-page service-topic-${service.slug}`;
->>>>>>> Stashed changes
 
   const toggleFaq = (index: number) => setOpenFaqIndex(current => current === index ? null : index);
 
@@ -382,7 +339,6 @@ const servicePageClass = isEnterpriseArchitecturePage
                   isBusinessAnalyticsPage ? 'md:grid-cols-12' : 'lg:grid-cols-12'
                 } gap-10 items-center`}
               >
-<<<<<<< Updated upstream
                 {isBusinessAnalyticsPage ? (
                   <motion.div
                     initial={reducedMotion ? false : { opacity: 0, y: 16 }}
@@ -399,58 +355,6 @@ const servicePageClass = isEnterpriseArchitecturePage
                     <div className="pt-2 flex flex-wrap gap-4">
                       <a href="https://prakvi.com/business-analytics.html#services" className="btn-primary">
                         <span>Explore Services</span>
-=======
-                <div className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-accent">
-                  {service.badge || 'Prakvi Service'}
-                </div>
-
-
-<h1 className="font-display text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold text-foreground tracking-tight leading-[1.1] text-balance">
-  {cloudServicesHero || standardizedServiceSlugs.has(service.slug) ? (
-    <ScrollRevealText
-      text={service.tagline}
-      preserveLayout
-      once={cloudServicesHero}
-    />
-  ) : (
-    <ScrollRevealText
-      text={service.title}
-      preserveLayout
-    />
-  )}
-</h1>
-
-
-
-                {!cloudServicesHero && !hasSectionLinks && !standardizedServiceSlugs.has(service.slug) && <p className="text-lg sm:text-xl font-semibold text-accent">
-                  {service.tagline}
-                </p>}
-
-                <p className="text-base text-muted leading-relaxed">
-                  {service.fullDesc}
-                </p>
-
-                <div className="pt-2 flex flex-wrap gap-4">
-                  {cloudServicesHero ? (
-                    <>
-                      <a href="#capabilities" onClick={followSectionLink} className="btn-primary">
-                        <span>Explore Services</span><ArrowRight className="arrow-shift" aria-hidden="true" />
-                      </a>
-                      <a href="#cloud-services-process" onClick={followSectionLink} className="btn-secondary">
-                        <span>Our Process</span><ArrowRight className="arrow-shift" aria-hidden="true" />
-                      </a>
-                    </>
-                  ) : hasSectionLinks ? (
-                    <>
-                      <a href="#capabilities" onClick={followSectionLink} className="btn-primary">Explore Services</a>
-                      <a href={`#${mobileAppHero ? mobileProcessId : 'digital-marketing-process'}`} onClick={followSectionLink}
-                        className="btn-secondary">Our Process</a>
-                    </>
-                  ) : (
-                    <>
-                      <Link to="/contact" className="btn-primary">
-                        <span>Schedule Consultation</span>
->>>>>>> Stashed changes
                         <ArrowRight className="arrow-shift" aria-hidden="true" />
                       </a>
                       <a href="https://prakvi.com/business-analytics.html#process" className="btn-secondary">
@@ -506,7 +410,6 @@ const servicePageClass = isEnterpriseArchitecturePage
                   </motion.div>
                 )}
 
-<<<<<<< Updated upstream
                 {!isBusinessAnalyticsPage && (
                   <motion.div
                     initial={reducedMotion ? false : { opacity: 0, y: 16 }}
@@ -556,54 +459,6 @@ const servicePageClass = isEnterpriseArchitecturePage
         isMobilityPage ? <MobilityPracticeSections /> : service.slug === 'supply-chain-management' ? <SupplyChainSections /> : service.slug === 'system-integration' ? <SystemIntegrationSections /> : service.slug === 'project-management' ? <ProjectManagementSections /> : (
         <>
         {!isEnterpriseArchitecturePage && !isBusinessAnalyticsPage && !isTargetSectionRemovalPage && (
-=======
-
-{!isBusinessAnalyticsPage && !cloudServicesHero && !digitalMarketingHero && !mobileAppHero && (
-  <motion.div
-    initial={reducedMotion ? false : { opacity: 0, y: 16 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{
-      duration: reducedMotion ? 0 : 0.6,
-      delay: reducedMotion ? 0 : 0.16,
-      ease: [0.22, 1, 0.36, 1],
-    }}
-    className="lg:col-span-5"
-  >
-
-                  <div className="clay-card p-3">
-                    <img
-                      src={service.featuredImage}
-                      alt={service.title}
-                      className="service-hero-image w-full h-72 sm:h-80 object-cover rounded-2xl"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          </div>
-          {heroStyle && (
-            <ServiceHeroMedia
-              key={heroStyle}
-              videoRef={heroVideo}
-              autoPlay={!reducedMotion && !digitalMarketingHero}
-              extendRightEdge={!cloudServicesHero}
-              sampleEdges={!cloudServicesHero}
-              poster={`${import.meta.env.BASE_URL}videos/${service.slug}-poster.webp`}
-              preload={reducedMotion ? 'none' : 'metadata'}
-            >
-              {!reducedMotion && <source src={`${import.meta.env.BASE_URL}videos/${service.slug}.mp4`} type="video/mp4" />}
-            </ServiceHeroMedia>
-          )}
-        </section>
-        )}
-
-        {cloudServicesHero && <CloudServicesSections service={service} />}
-        {isInfrastructurePage && <InfrastructureManagementSections service={service} />}
-
-        {/* Challenge & Approach cards are intentionally omitted on redesigned service pages. */}
-        {!standardizedServiceSlugs.has(service.slug) && (
->>>>>>> Stashed changes
         <section className="py-section bg-canvas">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -661,7 +516,6 @@ const servicePageClass = isEnterpriseArchitecturePage
             description={offeringsDescription}
             services={service.capabilities}
           />
-<<<<<<< Updated upstream
         ) : isBusinessAnalyticsPage ? (
           <BusinessAnalyticsCarousel
             title={offeringsTitle}
@@ -678,17 +532,6 @@ const servicePageClass = isEnterpriseArchitecturePage
                 title={offeringsTitle}
                 description={offeringsDescription}
               />
-=======
-        ) : showStandardServiceSections && (
-        <section id="capabilities" className="py-section bg-canvas">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SectionHeading
-              badge="Capabilities"
-              title={offeringsTitle}
-              description={offeringsDescription}
-            />
->>>>>>> Stashed changes
-
               <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {service.capabilities.map((cap, idx) => (
                   <div key={idx} className="clay-card clay-card-interactive p-7">
@@ -714,15 +557,9 @@ const servicePageClass = isEnterpriseArchitecturePage
         {/* 5. METHODOLOGY / DELIVERY PROCESS */}
         {isEnterpriseArchitecturePage ? (
           <EnterpriseArchitectureJourney title={processTitle} description={processDescription} steps={service.deliverySteps} />
-<<<<<<< Updated upstream
         ) : (isBusinessAnalyticsPage || !hasDedicatedServiceSections) && (
         <section id={isEnterpriseArchitecturePage ? 'enterprise-process' : isBusinessAnalyticsPage ? 'process' : undefined} className={`py-section ${isMobilityPage ? 'bg-surface/75' : 'bg-canvas'}${isBusinessAnalyticsPage ? ' business-analytics-process' : ''}`}>
           <div className={`${isBusinessAnalyticsPage ? 'max-w-[1380px]' : 'max-w-7xl'} mx-auto px-4 sm:px-6 lg:px-8`}>
-=======
-        ) : showStandardServiceSections && (
-        <section className={`py-section bg-canvas ${isBusinessAnalyticsPage ? 'business-analytics-process' : ''}`}>
-          <div className={`${isBusinessAnalyticsPage ? 'max-w-[1060px]' : 'max-w-7xl'} mx-auto px-4 sm:px-6 lg:px-8`}>
->>>>>>> Stashed changes
             {isBusinessAnalyticsPage ? (
               <div className="business-analytics-process__intro">
                 <h2 className="business-analytics-process__heading">{processTitle}</h2>
@@ -983,13 +820,8 @@ const servicePageClass = isEnterpriseArchitecturePage
         {/* 6. INTERACTIVE STACK & CAPABILITY MATRIX */}
         {isEnterpriseArchitecturePage ? (
           <ArchitectureCarousel title={service.stackTitle || service.title} description={service.stackSummary} categories={stackTabs} />
-<<<<<<< Updated upstream
-        ) : stackTabs.length > 0 && (
-          <section className={isBusinessAnalyticsPage ? 'ea-carousel-section py-section bg-canvas' : 'py-section bg-canvas'}>
-=======
         ) : showStandardServiceSections && stackTabs.length > 0 && (
           <section className="py-section bg-canvas">
->>>>>>> Stashed changes
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <SectionHeading
                 badge="Capabilities & Stack"
@@ -1216,16 +1048,12 @@ const servicePageClass = isEnterpriseArchitecturePage
                 )}
               </div>
             </div>
-            </div>
+          </div>
           </section>
         )}
 
         {/* 7. BUSINESS BENEFITS */}
-<<<<<<< Updated upstream
-        {!isEnterpriseArchitecturePage && !isBusinessAnalyticsPage && !isTargetSectionRemovalPage && (
-=======
         {!standardizedServiceSlugs.has(service.slug) && (
->>>>>>> Stashed changes
         <>
         <section className="py-section bg-canvas">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
