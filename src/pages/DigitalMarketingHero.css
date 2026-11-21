@@ -1,9 +1,11 @@
 .digital-marketing-hero {
-  --service-hero-start: 28%;
+  --service-hero-start: 26%;
   --digital-hero-tail: linear-gradient(to bottom, transparent 85%, color-mix(in srgb, var(--theme-canvas) 42%, transparent) 95%, var(--theme-canvas));
+  --digital-media-top: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.55) 3%, #000 7%);
   --digital-media-bottom: linear-gradient(to bottom, black 87%, #000e 92%, #0008 96%, transparent);
   --service-hero-fade:
     linear-gradient(to right, transparent 8%, #0001 12%, #0004 17%, #0009 22%, #000d 27%, black 32%),
+    var(--digital-media-top),
     var(--digital-media-bottom);
   --service-hero-mobile-fade: linear-gradient(to bottom, transparent, #0004 5%, #000b 11%, black 17%, black 88%, #000b 95%, transparent);
   display: flex;
@@ -34,8 +36,19 @@
   display: none !important;
 }
 
-.digital-marketing-hero-content { width: 100%; }
-.digital-marketing-hero-copy { width: min(43%, 34rem); }
+.digital-marketing-hero-content {
+  max-width: none;
+  padding-inline: clamp(1rem, 6vw, 7.25rem);
+  width: 100%;
+}
+.digital-marketing-hero-copy {
+  display: block;
+  width: min(49%, 38rem);
+}
+.digital-marketing-hero-copy h1 {
+  font-size: clamp(2.125rem, 3.25vw, 3.4rem);
+  line-height: 1.1;
+}
 .digital-marketing-hero-copy .text-foreground,
 .digital-marketing-hero h1 { color: #172B4D !important; }
 .digital-marketing-hero-copy .text-muted,
@@ -44,6 +57,43 @@
 .digital-marketing-hero nav .text-muted { color: #365f82 !important; }
 .digital-marketing-hero nav :is(a:hover, [aria-current='page']) { color: #176da8 !important; }
 .digital-marketing-hero .service-hero-frame { mask-composite: intersect; }
+
+@media (min-width: 1024px) {
+  .digital-marketing-hero {
+    --service-hero-start: 29%;
+    --service-hero-right: clamp(4rem, 10vw, 12rem);
+    --service-hero-vertical-space: 3.5rem;
+    height: clamp(630px, 38vw, 650px);
+    min-height: 630px;
+  }
+
+  .digital-marketing-hero > .max-w-7xl {
+    width: min(100% - 2 * clamp(1.25rem, 4vw, 4rem), 82.5rem);
+    max-width: none;
+  }
+
+  .digital-marketing-hero .enterprise-hero-copy {
+    width: 48%;
+    max-width: 40rem;
+  }
+
+  .digital-marketing-hero .service-hero-media {
+    inset: 0 0 0 var(--service-hero-start);
+  }
+
+  .digital-marketing-hero .service-hero-frame {
+    --shifted-width: min(calc(100% + var(--service-hero-right)), calc((100cqh - var(--service-hero-vertical-space)) * 16 / 9 + var(--service-hero-right)));
+    display: grid;
+    width: var(--shifted-width);
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    margin-inline-start: calc(100% - var(--shifted-width));
+  }
+
+  .digital-marketing-hero .service-hero-frame canvas { display: block; }
+  .digital-marketing-hero .service-hero-video { object-fit: contain; object-position: center; }
+}
 
 @media (max-width: 1023px) {
   .digital-marketing-hero,
@@ -58,6 +108,6 @@
       linear-gradient(160deg, #f3fbff 3%, #e4f5fd 35%, #d0edfa 60%, #b9e2f6 74%, #a6d9f3 87%, #92c6eb) !important;
   }
 
-  .digital-marketing-hero-copy { width: 100%; max-width: 40rem; }
+  .digital-marketing-hero-copy { width: 100%; max-width: 38rem; }
   .digital-marketing-hero .service-hero-frame { grid-template-rows: clamp(2rem, 8vw, 3.25rem) auto clamp(1.5rem, 5vw, 3rem); }
 }

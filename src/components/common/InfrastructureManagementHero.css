@@ -1,14 +1,16 @@
-/* Infrastructure Management hero — dark graphite cinematic theme.
-   Root causes addressed:
-   1) Bottom mask faded to transparent over the light pearl tail → white haze
-   2) Multi-layer masks lacked -webkit-mask-composite, so soft edges never applied
-   3) Keep subject fully visible; blend only into matching dark graphite */
+
+/* ============================================
+   INFRASTRUCTURE MANAGEMENT HERO
+   Dark Graphite Cinematic Theme
+============================================ */
 
 .infrastructure-management-hero {
-  --service-hero-start: 21%;
+  --service-hero-start: 45%;
   --service-hero-vertical-space: 3rem;
+
   --infrastructure-tail-depth: clamp(4rem, 7vw, 6rem);
-  /* Pearl transition stays below the video mass so it cannot read as white fringe. */
+
+  /* Bottom transition — prevents white fringe */
   --infrastructure-hero-tail: linear-gradient(
     to bottom,
     transparent calc(100% - var(--infrastructure-tail-depth)),
@@ -16,46 +18,100 @@
     #4a5563 calc(100% - var(--infrastructure-tail-depth) * 0.28),
     var(--infra-pearl)
   );
+
+  /* Media blending */
   --infrastructure-media-horizontal: linear-gradient(
     to right,
-    transparent 24%,
-    rgb(0 0 0 / 20%) 34%,
-    rgb(0 0 0 / 75%) 46%,
-    #000 54% 100%
+    transparent,
+    rgb(0 0 0 / 22%) 14%,
+    #000 34% 88%,
+    rgb(0 0 0 / 72%) 100%
   );
+
   --infrastructure-media-vertical: linear-gradient(
     to bottom,
     transparent,
-    rgb(0 0 0 / 55%) 5%,
-    #000 12% 100%
+    rgb(0 0 0 / 24%) 7%,
+    #000 16% 84%,
+    rgb(0 0 0 / 32%) 94%,
+    transparent
   );
+
   --service-hero-fade:
     var(--infrastructure-media-horizontal),
     var(--infrastructure-media-vertical);
+
   --service-hero-mobile-fade:
-    linear-gradient(to right, transparent, #0009 12%, black 32% 100%),
+    linear-gradient(
+      to right,
+      transparent,
+      #0009 12%,
+      black 32% 100%
+    ),
     var(--infrastructure-media-vertical);
+
+  /* Dark graphite background */
   --service-hero-gradient:
     var(--infrastructure-hero-tail),
-    radial-gradient(ellipse 58% 80% at 9% 17%, #5266806b, transparent 88%),
-    radial-gradient(ellipse 48% 42% at 78% 72%, #b0805830, transparent 86%),
-    radial-gradient(ellipse 50% 64% at 88% 28%, #161d25, transparent 95%),
-    linear-gradient(112deg, #2a3340, #29323d 40%, #222932 67%, #2b3039);
+    radial-gradient(
+      ellipse 58% 80% at 9% 17%,
+      #5266806b,
+      transparent 88%
+    ),
+    radial-gradient(
+      ellipse 48% 42% at 78% 72%,
+      #b0805830,
+      transparent 86%
+    ),
+    radial-gradient(
+      ellipse 50% 64% at 88% 28%,
+      #161d25,
+      transparent 95%
+    ),
+    linear-gradient(
+      112deg,
+      #2a3340,
+      #29323d 40%,
+      #222932 67%,
+      #2b3039
+    );
+
+  /* Mobile background */
   --service-hero-mobile-gradient:
     var(--infrastructure-hero-tail),
-    radial-gradient(ellipse 90% 42% at 10% 12%, #5266806b, transparent 91%),
-    linear-gradient(155deg, #303a48, #29323d 62%, #222932);
+    radial-gradient(
+      ellipse 90% 42% at 10% 12%,
+      #5266806b,
+      transparent 91%
+    ),
+    linear-gradient(
+      155deg,
+      #303a48,
+      #29323d 62%,
+      #222932
+    );
+
   display: flex;
   align-items: center;
   min-height: clamp(36rem, 40vw, 44rem);
 }
 
-.infrastructure-management-hero > .max-w-7xl { width: 100%; }
+/* Main container */
+.infrastructure-management-hero > .max-w-7xl {
+  width: 100%;
+}
 
-.infrastructure-management-hero::after { content: none; }
+/* Remove unwanted overlay */
+.infrastructure-management-hero::after {
+  content: none;
+}
 
-.infrastructure-management-hero .service-hero-media { right: 8%; }
+/* Media positioning */
+.infrastructure-management-hero .service-hero-media {
+  right: 0;
+}
 
+/* Image and video masking */
 .infrastructure-management-hero .service-hero-frame {
   margin-inline: auto;
   -webkit-mask-image: var(--service-hero-mask);
@@ -64,15 +120,54 @@
   mask-composite: intersect;
 }
 
+/* Video appearance */
 .infrastructure-management-hero .service-hero-video {
   filter: contrast(1.04) saturate(1.05) brightness(1.02);
 }
 
-.infrastructure-management-hero .enterprise-hero-title { color: #F5F7FA; }
-.infrastructure-management-hero .enterprise-hero-description { color: #CBD5E1; }
-.infrastructure-management-hero .enterprise-hero-label { color: #e0b986; }
-.infrastructure-management-hero nav .text-muted { color: #c5cfdb; }
-.infrastructure-management-hero nav [aria-current='page'] { color: #e7c59c; }
+/* ============================================
+   DESKTOP MEDIA LAYOUT
+============================================ */
+
+@media (min-width: 1024px) {
+  .infrastructure-management-hero .service-hero-video {
+    position: absolute;
+    grid-area: auto;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY
+============================================ */
+
+.infrastructure-management-hero .enterprise-hero-title {
+  color: #f5f7fa;
+}
+
+.infrastructure-management-hero .enterprise-hero-description {
+  color: #cbd5e1;
+}
+
+.infrastructure-management-hero .enterprise-hero-label {
+  color: #e0b986;
+}
+
+.infrastructure-management-hero nav .text-muted {
+  color: #c5cfdb;
+}
+
+.infrastructure-management-hero nav [aria-current='page'] {
+  color: #e7c59c;
+}
+
+/* ============================================
+   SECONDARY BUTTON
+============================================ */
 
 .infrastructure-management-hero .btn-secondary {
   color: #27242d;
@@ -84,6 +179,10 @@
   color: #27242d;
   background: #f5eee5;
 }
+
+/* ============================================
+   TABLET & MOBILE RESPONSIVE
+============================================ */
 
 @media (max-width: 1023px) {
   .infrastructure-management-hero {

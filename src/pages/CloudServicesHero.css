@@ -1,118 +1,295 @@
-/* Cloud Services hero — light-blue theme with soft-edged dark video asset.
-   Root causes addressed:
-   1) .service-detail-page > section.hero-clay-canvas !important was winning background specificity
-   2) Multi-layer masks lacked -webkit-mask-composite, so edge fades never intersected
-   3) Edge-sampling canvases extended the baked-in navy rectangle */
+
+/* ============================================
+   CLOUD SERVICES HERO
+   Full-width cinematic video layout
+   Light Blue / Cyan Theme
+============================================ */
 
 .cloud-services-hero {
-  --service-hero-start: 21%;
-  --service-hero-vertical-space: 2.5rem;
-  --cloud-hero-bg:
-    linear-gradient(to top, var(--cloud-pearl, #f8fafc), transparent 17%),
-    radial-gradient(ellipse at 43% 93%, #ffe7db6b, transparent 47%),
-    radial-gradient(ellipse 52% 48% at 85% 48%, rgba(59, 102, 162, 0.28), transparent 72%),
-    linear-gradient(112deg, #f2f7fb 5%, #e2edf7 36%, #c3cbeb 57%, #91aed5 100%);
-  /* A single mask avoids the hard edge left by compositing multiple gradients over video. */
-  --cloud-video-horizontal-fade: linear-gradient(
+  --service-hero-start: 29%;
+  --service-hero-right: clamp(4rem, 10vw, 12rem);
+  --service-hero-vertical-space: 3.5rem;
+
+  --cloud-hero-bg: linear-gradient(
+    106deg,
+    #dceefa 0%,
+    #cce7f5 28%,
+    #b4d9ed 46%,
+    #8bbfdd 65%,
+    #5b9fc5 84%,
+    #397da8 100%
+  );
+
+  --cloud-hero-mobile-bg: linear-gradient(
+    155deg,
+    #edf8ff 0%,
+    #d8edf9 42%,
+    #b7d8ed 72%,
+    #83b8d8 100%
+  );
+
+  --service-hero-gradient: var(--cloud-hero-bg);
+  --service-hero-mobile-gradient: var(--cloud-hero-mobile-bg);
+
+  /* Horizontal fade: blend video into the blue text background. */
+  --cloud-video-horizontal: linear-gradient(
     to right,
-    transparent 10%,
-    rgb(0 0 0 / 18%) 26%,
-    rgb(0 0 0 / 70%) 40%,
-    #000 50% 78%,
-    rgb(0 0 0 / 70%) 88%,
-    rgb(0 0 0 / 22%) 95%,
-    transparent
+    transparent 0%,
+    rgb(0 0 0 / 0.08) 12%,
+    rgb(0 0 0 / 0.25) 21%,
+    rgb(0 0 0 / 0.58) 29%,
+    #000 40%,
+    #000 100%
   );
-  --cloud-video-vertical-fade: linear-gradient(
+
+  /* Vertical fade: eliminate hard video edges. */
+  --cloud-video-vertical: linear-gradient(
     to bottom,
-    transparent,
-    rgb(0 0 0 / 28%) 7%,
-    #000 16% 82%,
-    rgb(0 0 0 / 32%) 93%,
-    transparent
+    transparent 0%,
+    #000 7%,
+    #000 87%,
+    rgb(0 0 0 / 0.65) 94%,
+    transparent 100%
   );
-  --service-hero-fade: radial-gradient(ellipse 54% 60% at 58% 50%, #000 52%, transparent 100%);
-  min-height: clamp(32rem, 40vw, 46rem);
+
+  --service-hero-fade:
+    var(--cloud-video-horizontal),
+    var(--cloud-video-vertical);
+
+  --service-hero-mobile-fade: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+
+  background: var(--cloud-hero-bg);
   display: flex;
   align-items: center;
-  background: var(--cloud-hero-bg);
+  min-height: clamp(650px, 42vw, 720px);
+  isolation: isolate;
 }
 
-/* Beat .service-detail-page > section.hero-clay-canvas (0,2,1) + !important */
-.cloud-services-page.service-detail-page > section.hero-clay-canvas.cloud-services-hero {
+/* ============================================
+   BACKGROUND OVERRIDE
+============================================ */
+
+.cloud-services-page.service-detail-page
+  > section.hero-clay-canvas.cloud-services-hero {
   background: var(--cloud-hero-bg) !important;
 }
 
-.cloud-services-page.service-detail-page > section.hero-clay-canvas.cloud-services-hero::before,
-.cloud-services-page.service-detail-page > section.hero-clay-canvas.cloud-services-hero::after {
+.cloud-services-hero::before,
+.cloud-services-hero::after {
   content: none !important;
   display: none !important;
 }
 
-.cloud-services-hero .service-hero-video {
-  filter: contrast(1.08) saturate(0.86) brightness(0.84);
+/* ============================================
+   CONTENT LAYOUT
+============================================ */
+
+.cloud-services-hero > .max-w-7xl {
+  width: min(
+    calc(100% - 2 * clamp(1.25rem, 4vw, 4rem)),
+    90rem
+  );
 }
 
-.cloud-services-hero-content {
-  width: 100%;
+.cloud-services-hero .enterprise-hero-copy {
+  position: relative;
+  z-index: 3;
+  width: 48%;
+  max-width: 40rem;
+  color: #112238;
 }
 
-.cloud-services-hero-copy {
-  display: block;
-  width: min(43%, 34rem);
+.cloud-services-hero .enterprise-hero-label {
+  color: #17668d;
 }
 
-.cloud-services-hero .service-hero-media {
-  right: 6%;
+.cloud-services-hero .enterprise-hero-title {
+  color: #087fb9;
 }
 
-.cloud-services-hero .service-hero-frame {
-  margin-inline: auto;
-  -webkit-mask-image: var(--service-hero-mask);
-  mask-image: var(--service-hero-mask);
-  -webkit-mask-composite: source-over;
-  mask-composite: add;
+.cloud-services-hero .enterprise-hero-tagline {
+  color: #193f58;
 }
 
-/* Edge canvases re-paint the navy plate outward — hide them on this light hero. */
-.cloud-services-hero .service-hero-frame canvas {
-  display: none;
+.cloud-services-hero .enterprise-hero-description {
+  color: #355773;
 }
 
-@media (max-width: 1023px) {
+.cloud-services-hero nav .text-muted {
+  color: #38536f;
+}
+
+.cloud-services-hero nav [aria-current='page'] {
+  color: #17668d;
+}
+
+/* ============================================
+   DESKTOP VIDEO LAYOUT
+============================================ */
+
+@media (min-width: 1024px) {
   .cloud-services-hero {
-    --cloud-hero-bg:
-      linear-gradient(to top, var(--cloud-pearl, #f8fafc), transparent clamp(2rem, 8vw, 5rem)),
-      radial-gradient(ellipse at 25% 69%, #ffe6d96b, transparent 53%),
-      radial-gradient(ellipse 70% 32% at 75% 85%, rgba(82, 124, 180, 0.38), transparent),
-      linear-gradient(160deg, #f2f7fb, #e7eff7 42%, #c8d1ed 68%, #a4bbdb);
-    --cloud-video-horizontal-fade: linear-gradient(
-      to right,
-      transparent,
-      rgb(0 0 0 / 40%) 18%,
-      #000 40% 86%,
-      rgb(0 0 0 / 40%) 94%,
-      transparent
-    );
-    --service-hero-mobile-fade: radial-gradient(ellipse 76% 82% at 50% 50%, #000 50%, transparent 100%);
-    display: block;
-    min-height: auto;
-    padding-block: clamp(1.75rem, 5vw, 3.5rem) 0;
-    background: var(--cloud-hero-bg);
-  }
-
-  .cloud-services-page.service-detail-page > section.hero-clay-canvas.cloud-services-hero {
+    height: clamp(650px, 42vw, 720px);
+    min-height: 650px;
+    max-height: 720px;
+    overflow: hidden;
     background: var(--cloud-hero-bg) !important;
   }
 
-  .cloud-services-hero-copy {
+  /* Keep text above the visual while allowing blue background behind it. */
+  .cloud-services-hero > .max-w-7xl {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cloud-services-hero .enterprise-hero-copy {
+    width: 48%;
+    max-width: 40rem;
+  }
+
+  .cloud-services-hero .enterprise-hero-title {
+    max-width: 38rem;
+    font-size: clamp(40px, 3.2vw, 58px);
+    font-weight: 700;
+    line-height: 1.12;
+  }
+
+  .cloud-services-hero .enterprise-hero-description {
+    max-width: 39rem;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* Media occupies the complete right side of the hero. */
+  .cloud-services-hero .service-hero-media {
+    position: absolute;
+    inset: 0 0 0 var(--service-hero-start);
+    width: auto;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Expand the frame leftward while keeping its right edge at the viewport edge. */
+  .cloud-services-hero .service-hero-frame {
+    position: relative;
+    display: block;
+    width: calc(100% + var(--service-hero-right));
+    max-width: none;
+    height: 100%;
+    margin: 0 0 0 calc(-1 * var(--service-hero-right));
+    overflow: hidden;
+
+    -webkit-mask-image: var(--service-hero-fade);
+    mask-image: var(--service-hero-fade);
+
+    /* Intersect horizontal and vertical masks. */
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  /* Critical fix: video covers the entire frame, not a grid row. */
+  .cloud-services-hero .service-hero-video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: right center;
+    filter: contrast(1.04) saturate(1.06) brightness(1.02);
+  }
+
+  .cloud-services-hero .service-hero-frame canvas {
+    display: block;
+    pointer-events: none;
+  }
+}
+
+/* ============================================
+   TABLET & MOBILE
+============================================ */
+
+@media (max-width: 1023px) {
+  .cloud-services-hero {
+    display: block;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+    background: var(--cloud-hero-mobile-bg) !important;
+  }
+
+  .cloud-services-hero > .max-w-7xl {
+    width: 100%;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  .cloud-services-hero .enterprise-hero-copy {
     width: 100%;
     max-width: 44rem;
   }
 
+  .cloud-services-hero .enterprise-hero-title {
+    font-size: clamp(2.3rem, 7vw, 3.5rem);
+    line-height: 1.12;
+  }
+
+  .cloud-services-hero .enterprise-hero-description {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Video moves below the text on smaller screens. */
   .cloud-services-hero .service-hero-media {
-    right: auto;
-    margin-inline: auto;
-    max-width: 54rem;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .cloud-services-hero .service-hero-frame {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .cloud-services-hero .service-hero-frame canvas {
+    display: none;
+  }
+
+  .cloud-services-hero .service-hero-video {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: clamp(16rem, 60vw, 27rem);
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-services-hero .service-hero-video {
+    animation: none;
+    transition: none;
   }
 }

@@ -1137,8 +1137,13 @@ const serviceCatalog: ServiceItem[] = [
       {
         title: 'Enterprise Architecture & Consulting',
         description: 'Crafting frameworks that tightly align business strategy and IT systems for cohesive transformation.',
-        points: ['Enterprise architecture planning', 'Technology-roadmap development', 'IT governance & compliance', 'Digital transformation consulting'],
         icon: 'Layers',
+        points: [
+          'Enterprise architecture planning',
+          'Technology roadmap development',
+          'IT governance & compliance',
+          'Digital transformation consulting',
+        ],
       },
       {
         title: 'Project Management & Enterprise Solutions',

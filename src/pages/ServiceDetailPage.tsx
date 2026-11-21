@@ -13,6 +13,9 @@ import { SupplyChainSections } from '../components/common/SupplyChainSections';
 import { SystemIntegrationSections } from '../components/common/SystemIntegrationSections';
 import { SystemIntegrationHero } from '../components/common/SystemIntegrationHero';
 import { ProjectManagementHero } from '../components/common/ProjectManagementHero';
+import { CloudServicesHero } from '../components/common/CloudServicesHero';
+import { DigitalMarketingHero } from '../components/common/DigitalMarketingHero';
+import { MobileAppDevelopmentHero } from '../components/common/MobileAppDevelopmentHero';
 import { ProjectManagementSections } from '../components/common/ProjectManagementSections';
 import { InfrastructureManagementHero } from '../components/common/InfrastructureManagementHero';
 import { InfrastructureManagementSections } from '../components/common/InfrastructureManagementSections';
@@ -320,6 +323,12 @@ export const ServiceDetailPage: React.FC = () => {
           <SystemIntegrationHero service={service} />
         ) : isInfrastructurePage ? (
           <InfrastructureManagementHero service={service} onSectionLink={followSectionLink} />
+        ) : cloudServicesHero ? (
+          <CloudServicesHero service={service} />
+        ) : mobileAppHero ? (
+          <MobileAppDevelopmentHero service={service} />
+        ) : digitalMarketingHero ? (
+          <DigitalMarketingHero service={service} />
         ) : (
           <section
             className={`hero-clay-canvas py-section relative overflow-hidden${heroStyle ? ` ${heroStyle} isolate` : ''}${isBusinessAnalyticsPage ? ' business-analytics-hero business-analytics-video-hero service-video-hero isolate' : ''}`}
@@ -410,7 +419,7 @@ export const ServiceDetailPage: React.FC = () => {
                   </motion.div>
                 )}
 
-                {!isBusinessAnalyticsPage && (
+                {!isBusinessAnalyticsPage && !digitalMarketingHero && !mobileAppHero && !cloudServicesHero && (
                   <motion.div
                     initial={reducedMotion ? false : { opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -434,7 +443,7 @@ export const ServiceDetailPage: React.FC = () => {
                 key={heroStyle || 'business-analytics'}
                 videoRef={heroVideo}
                 autoPlay={!reducedMotion && !digitalMarketingHero}
-                extendRightEdge={Boolean(heroStyle)}
+                extendRightEdge={Boolean(heroStyle) && !digitalMarketingHero && !mobileAppHero}
                 sampleEdges={!isBusinessAnalyticsPage}
                 poster={isBusinessAnalyticsPage
                   ? `${import.meta.env.BASE_URL}videos/data-analytics-poster.webp`
@@ -458,7 +467,7 @@ export const ServiceDetailPage: React.FC = () => {
         {!isEnterpriseArchitecturePage && (
         isMobilityPage ? <MobilityPracticeSections /> : service.slug === 'supply-chain-management' ? <SupplyChainSections /> : service.slug === 'system-integration' ? <SystemIntegrationSections /> : service.slug === 'project-management' ? <ProjectManagementSections /> : (
         <>
-        {!isEnterpriseArchitecturePage && !isBusinessAnalyticsPage && !isTargetSectionRemovalPage && (
+        {!isEnterpriseArchitecturePage && !isBusinessAnalyticsPage && !isTargetSectionRemovalPage && !cloudServicesHero && !isInfrastructurePage && !digitalMarketingHero && !mobileAppHero && (
         <section className="py-section bg-canvas">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -523,6 +532,10 @@ export const ServiceDetailPage: React.FC = () => {
             capabilities={service.capabilities}
             align="center"
           />
+        ) : cloudServicesHero ? (
+          <CloudServicesSections service={service} />
+        ) : isInfrastructurePage ? (
+          <InfrastructureManagementSections service={service} />
         ) : (
           !hasDedicatedServiceSections && (
             <section id="capabilities" className="py-section bg-canvas">
@@ -557,7 +570,7 @@ export const ServiceDetailPage: React.FC = () => {
         {/* 5. METHODOLOGY / DELIVERY PROCESS */}
         {isEnterpriseArchitecturePage ? (
           <EnterpriseArchitectureJourney title={processTitle} description={processDescription} steps={service.deliverySteps} />
-        ) : (isBusinessAnalyticsPage || !hasDedicatedServiceSections) && (
+        ) : (isBusinessAnalyticsPage || (!hasDedicatedServiceSections && !cloudServicesHero && !isInfrastructurePage)) && (
         <section id={isEnterpriseArchitecturePage ? 'enterprise-process' : isBusinessAnalyticsPage ? 'process' : undefined} className={`py-section ${isMobilityPage ? 'bg-surface/75' : 'bg-canvas'}${isBusinessAnalyticsPage ? ' business-analytics-process' : ''}`}>
           <div className={`${isBusinessAnalyticsPage ? 'max-w-[1380px]' : 'max-w-7xl'} mx-auto px-4 sm:px-6 lg:px-8`}>
             {isBusinessAnalyticsPage ? (

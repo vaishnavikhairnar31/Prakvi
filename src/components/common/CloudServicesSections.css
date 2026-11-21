@@ -328,3 +328,159 @@
   .cloud-offering-slot[data-active='true'] .cloud-offering-art > svg,
   .cloud-capability-card:hover { transform: none; }
 }
+
+@media (min-width: 981px) {
+  .cloud-services-page #cloud-services-process {
+    width: 100%;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-inner {
+    width: min(1280px, calc(100% - 3rem));
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-heading {
+    margin-bottom: 0.25rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-workspace {
+    grid-template-columns: minmax(0, 60fr) minmax(24rem, 40fr);
+    align-items: start;
+    gap: clamp(1.75rem, 2.5vw, 2.75rem);
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-route {
+    width: 100%;
+    height: 52rem;
+    min-height: 52rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-paths {
+    z-index: 0;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-atmosphere {
+    z-index: 0;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-nodes {
+    z-index: 2;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node-position {
+    width: 260px;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node-float {
+    width: 100%;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node {
+    width: 260px;
+    min-height: 100px;
+    padding: 0.78rem 0.9rem;
+    border-color: rgba(145, 187, 213, 0.58);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(235, 247, 253, 0.9));
+    box-shadow: inset 0 1px rgba(255,255,255,.98), 0 12px 24px -18px rgba(55, 112, 156, 0.58);
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node:is(:hover, :focus-visible) {
+    transform: translateY(-4px) scale(1.012);
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node-title {
+    font-size: 0.95rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-glass {
+    width: 420px;
+    max-width: 100%;
+    min-width: 420px;
+    min-height: 400px;
+    margin-top: 2.5rem;
+    justify-self: end;
+    z-index: 3;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-details {
+    min-height: 20.5rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-detail h3 {
+    color: #172b45;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-detail,
+  .cloud-services-page #cloud-services-process .ea-journey-detail p,
+  .cloud-services-page #cloud-services-process .ea-journey-detail li {
+    color: #405a74;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1199px) {
+  .cloud-services-page #cloud-services-process .ea-journey-inner {
+    width: min(1280px, calc(100% - 2rem));
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-workspace {
+    grid-template-columns: minmax(0, 58fr) minmax(22rem, 42fr);
+    gap: 1.25rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node-position {
+    width: 220px;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node {
+    width: 220px;
+    min-height: 92px;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-glass {
+    width: 100%;
+    min-width: 22rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .cloud-services-page #cloud-services-process .ea-journey-inner {
+    width: min(43rem, calc(100% - 2rem));
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-route {
+    width: 100%;
+    height: 43rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node-position {
+    width: 68%;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-glass {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .cloud-services-page #cloud-services-process .ea-journey-inner {
+    width: calc(100% - 2rem);
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-route {
+    height: 36rem;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node-position {
+    width: 68%;
+  }
+
+  .cloud-services-page #cloud-services-process .ea-journey-node {
+    width: 100%;
+    min-height: 3.6rem;
+  }
+}
