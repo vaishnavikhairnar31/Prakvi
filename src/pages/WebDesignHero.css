@@ -1,0 +1,162 @@
+.service-detail-page.service-topic-web-design > section.web-design-video-hero {
+  --service-hero-start: 42%;
+  --service-hero-right: 0.25rem;
+  --service-hero-vertical-space: 2.5rem;
+  --service-hero-fade: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(248, 251, 255, 0.14) 8%,
+    rgba(248, 251, 255, 0.48) 18%,
+    rgba(248, 251, 255, 0.78) 29%,
+    rgba(248, 251, 255, 0.92) 38%,
+    #f8fbff 48%
+  );
+  --service-hero-mobile-fade: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(248, 251, 255, 0.35) 6%,
+    #f8fbff 18%,
+    #f8fbff 82%,
+    rgba(248, 251, 255, 0.5) 94%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: center;
+  min-height: clamp(40rem, 43vw, 48rem);
+  padding-block: clamp(3rem, 4.5vw, 4.5rem);
+  color: #172b45;
+  background:
+    radial-gradient(ellipse 38% 62% at 79% 44%, rgba(181, 213, 255, 0.34), transparent 78%),
+    radial-gradient(ellipse 28% 48% at 93% 23%, rgba(177, 154, 238, 0.16), transparent 82%),
+    linear-gradient(108deg, #ffffff 0%, #f8fbff 40%, #eef6ff 58%, #edf3ff 78%, #f9fbff 100%) !important;
+}
+
+.service-detail-page.service-topic-web-design > section.web-design-video-hero::before {
+  z-index: 0;
+  opacity: 0.16;
+  background:
+    radial-gradient(circle, rgba(104, 176, 230, 0.22) 0 1px, transparent 1.6px) 0 0 / 190px 170px,
+    radial-gradient(circle, rgba(157, 132, 220, 0.14) 0 1px, transparent 1.6px) 70px 90px / 230px 210px;
+  animation: none;
+}
+
+.service-detail-page.service-topic-web-design > section.web-design-video-hero::after {
+  content: none;
+}
+
+.web-design-video-hero-content {
+  width: 100%;
+}
+
+.web-design-video-hero-layout {
+  position: relative;
+}
+
+.web-design-video-hero-copy {
+  max-width: 43rem;
+  position: relative;
+  z-index: 2;
+}
+
+.web-design-video-hero-copy h1 {
+  color: #172b45;
+}
+
+.web-design-video-hero-copy .text-accent {
+  color: #078fce;
+}
+
+.web-design-video-hero-copy p {
+  color: #405a74;
+}
+
+.web-design-video-hero .service-hero-media {
+  z-index: 1;
+  inset: 0 0 0 41%;
+}
+
+.web-design-video-hero .service-hero-frame {
+  width: min(100%, calc((100cqh - var(--service-hero-vertical-space)) * 16 / 9));
+  margin-inline-start: auto;
+  -webkit-mask-image: var(--service-hero-fade);
+  mask-image: var(--service-hero-fade);
+}
+
+.web-design-video-hero .service-hero-video {
+  background: transparent;
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  .web-design-video-hero-copy h1 {
+    font-size: clamp(2.75rem, 3.35vw, 3.35rem);
+  }
+}
+
+.service-detail-page.service-topic-web-design > section.web-design-video-hero .btn-primary {
+  color: #fff;
+  background: linear-gradient(125deg, #0798dc, #5a7de2);
+  border-color: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 10px 24px rgba(72, 125, 205, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.34);
+}
+
+.service-detail-page.service-topic-web-design > section.web-design-video-hero .btn-primary:hover {
+  background: linear-gradient(125deg, #168fd2, #506fe0);
+  box-shadow: 0 14px 28px rgba(72, 125, 205, 0.26);
+}
+
+.service-detail-page.service-topic-web-design > section.web-design-video-hero .btn-secondary {
+  color: #17345b;
+  background: rgba(249, 252, 255, 0.92);
+  border-color: rgba(67, 148, 210, 0.24);
+  box-shadow: 0 8px 20px rgba(28, 63, 105, 0.08);
+}
+
+@media (max-width: 1023px) {
+  .service-detail-page.service-topic-web-design > section.web-design-video-hero {
+    display: block;
+    min-height: 0;
+    padding-top: 2.5rem;
+    padding-bottom: 0;
+    background:
+      radial-gradient(ellipse 82% 24% at 76% 74%, rgba(181, 213, 255, 0.28), transparent 78%),
+      linear-gradient(180deg, #fff 0%, #f8fbff 58%, #eef5ff 78%, #f9fbff 100%) !important;
+  }
+
+  .web-design-video-hero-content {
+    margin-bottom: 1.5rem;
+  }
+
+  .web-design-video-hero-copy {
+    max-width: 46rem;
+  }
+
+  .web-design-video-hero .service-hero-media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .web-design-video-hero .service-hero-frame {
+    width: min(100%, 58rem);
+    height: auto;
+    margin-inline: auto;
+    grid-template-rows: clamp(1rem, 5vw, 2.5rem) auto clamp(1rem, 5vw, 2.5rem);
+    -webkit-mask-image: var(--service-hero-mobile-fade);
+    mask-image: var(--service-hero-mobile-fade);
+  }
+
+  .web-design-video-hero .service-hero-video {
+    width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .service-detail-page.service-topic-web-design > section.web-design-video-hero {
+    padding-top: 1.5rem;
+  }
+
+  .web-design-video-hero-content {
+    margin-bottom: 1rem;
+  }
+}

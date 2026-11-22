@@ -23,10 +23,15 @@ import { ScrollRevealText } from '../components/common/ScrollRevealText';
 import { ServiceHeroMedia } from '../components/common/ServiceHeroMedia';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { BusinessAnalyticsCarousel } from '../components/common/BusinessAnalyticsCarousel';
+import { ITConsultingApproach } from '../components/common/ITConsultingApproach';
+import { ITConsultingStack } from '../components/common/ITConsultingStack';
+import { WebDesignExpertiseCarousel } from '../components/common/WebDesignExpertiseCarousel';
 import {
   BusinessAnalyticsStackOrbit,
   businessAnalyticsCategoryIcons,
 } from '../components/common/BusinessAnalyticsStackOrbit';
+import { WebDesignStack } from '../components/common/WebDesignStack';
+import { EnterpriseSolutionsStack } from '../components/common/EnterpriseSolutionsStack';
 import { CTASection } from '../components/common/CTASection';
 import { CloudServicesSections } from '../components/common/CloudServicesSections';
 import { DigitalMarketingSections } from '../components/common/DigitalMarketingSections';
@@ -38,21 +43,26 @@ import { StaffingPage } from './StaffingPage';
 import { WorkforceSolutionsPage } from './WorkforceSolutionsPage';
 import { BusinessIntelligencePage } from './BusinessIntelligencePage';
 import {
-  AlertCircle,
   Activity,
+  AlertCircle,
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
+  Code2,
   ChevronDown,
   Database,
   FileText,
   Laptop,
   Layers,
   Lock,
+  Monitor,
   Pause,
   Play,
+  Plug,
   Search,
   Server,
+  ShieldCheck,
+  ShoppingBag,
   Sparkles,
   Target,
   TrendingUp,
@@ -63,6 +73,10 @@ import './MobileAppDevelopmentHero.css';
 import './DigitalMarketingHero.css';
 import './CloudServicesHero.css';
 import './ServicePageDesign.css';
+import './EnterpriseSolutionsCarousel.css';
+import './EnterpriseSolutionsHero.css';
+import './ITConsultingHero.css';
+import './WebDesignHero.css';
 
 const standardizedServiceSlugs = new Set([
   'enterprise-architecture',
@@ -119,12 +133,17 @@ const analyticsMobileCardPositions = [
 const analyticsCardAccents = ['#48a8d4', '#9075c5', '#55a0c8', '#d08b5f', '#738ac0', '#49a2c2', '#67a78e'];
 const businessAnalyticsHeroTitle = 'Turning Data into Actionable Business Analytics';
 const businessAnalyticsHeroDescription = 'In today’s data-driven world, raw information is abundant but only the right business analytics transforms it into a competitive advantage. Prakvi’s Business Analytics Services in India help organizations harness the power of advanced analytics, AI-driven insights, and industry expertise to improve decision-making, optimize operations, and accelerate growth. From predictive analytics and prescriptive analytics to real-time performance dashboards and data visualization, we deliver tailored, scalable solutions that turn data into measurable business value. With Prakvi, your data becomes your most powerful asset.';
+const webDesignHeroTitle = 'Creative, Responsive, and User Centric Web Design Solutions';
+const webDesignHeroDescription = 'Your website is more than an online presence it’s your digital storefront and first impression. Prakvi’s web design services in India create professional, responsive, and visually engaging websites. We deliver custom website design, corporate sites, and eCommerce solutions with fast loading, mobile-friendly layouts, and seamless navigation. From concept to launch, we design websites that reflect your brand and drive business growth.';
 
 export const ServiceDetailPage: React.FC = () => {
   const reducedMotion = useReducedMotion();
   const { slug } = useParams<{ slug: string }>();
   const resolvedSlug = slug ? slugAliases[slug] || slug : '';
   const cloudServicesHero = resolvedSlug === 'cloud-services';
+  const isEnterpriseSolutionsHero = resolvedSlug === 'enterprise-solution';
+  const isITConsultingHero = resolvedSlug === 'it-consulting';
+  const isWebDesignHero = resolvedSlug === 'web-design';
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [activeStackTab, setActiveStackTab] = useState(0);
   const digitalMarketingHero = slug === 'digital-marketing';
@@ -134,7 +153,6 @@ export const ServiceDetailPage: React.FC = () => {
   const heroVideo = useRef<HTMLVideoElement>(null);
   const [activeAnalyticsStep, setActiveAnalyticsStep] = useState(0);
   const [isAnalyticsAutoPlaying, setIsAnalyticsAutoPlaying] = useState(true);
-
   useEffect(() => {
     const video = heroVideo.current;
     if (!heroStyle || !video) return;
@@ -146,13 +164,11 @@ export const ServiceDetailPage: React.FC = () => {
     };
     setActiveStackTab(0);
     setOpenFaqIndex(0);
-    setActiveAnalyticsStep(0);
-    setIsAnalyticsAutoPlaying(!reducedMotion);
   }, [slug, reducedMotion]);
 
   useEffect(() => {
     const video = heroVideo.current;
-    if ((!heroStyle && slug !== 'business-analytics') || !video) return;
+    if ((!heroStyle && slug !== 'business-analytics' && !isEnterpriseSolutionsHero) || !video) return;
     const play = () => { void video.play().catch(() => { /* Keep the poster visible if autoplay is blocked. */ }); };
 
     if (reducedMotion) {
@@ -185,12 +201,13 @@ export const ServiceDetailPage: React.FC = () => {
       observer.disconnect();
       video.pause();
     };
-  }, [digitalMarketingHero, heroStyle, reducedMotion, slug]);
+  }, [digitalMarketingHero, heroStyle, isEnterpriseSolutionsHero, reducedMotion, slug]);
 
   const service = servicesData.find(
     (s) => s.slug === resolvedSlug || s.id === resolvedSlug || s.slug === slug || s.id === slug
   );
   const isBusinessAnalyticsPage = service?.slug === 'business-analytics';
+  const isEnterpriseSolutionPage = service?.slug === 'enterprise-solution';
   const analyticsStepCount = service?.deliverySteps.length ?? 7;
 
   useEffect(() => {
@@ -246,7 +263,8 @@ export const ServiceDetailPage: React.FC = () => {
     && !cloudServicesHero
     && !isInfrastructurePage;
   const isTargetSectionRemovalPage =
-    service.slug === 'it-consulting'
+    service.slug === 'business-analytics'
+    || service.slug === 'it-consulting'
     || service.slug === 'web-design'
     || service.slug === 'enterprise-solution';
   const offeringsTitle = service.offeringsTitle || `${service.title} Offerings`;
@@ -266,17 +284,11 @@ export const ServiceDetailPage: React.FC = () => {
     ? Math.min(Math.max(activeStackTab, 0), stackTabs.length - 1)
     : 0;
   const currentStack = stackTabs[activeStackIndex];
+  const ActiveAnalyticsIcon = analyticsStepIcons[activeAnalyticsStep] || Database;
 
-  const analyticsStepIndex = service.deliverySteps.length
-    ? Math.min(Math.max(activeAnalyticsStep, 0), service.deliverySteps.length - 1)
-    : -1;
-  const selectedAnalyticsStep = analyticsStepIndex >= 0
-    ? service.deliverySteps[analyticsStepIndex]
-    : undefined;
   const stackPanelId = `service-stack-panel-${service.slug}`;
   const stackTabId = (index: number) => `service-stack-tab-${service.slug}-${index}`;
   const ArchitectureStackIcon = [Target, Layers, Database, Server][activeStackTab] || Layers;
-  const ActiveAnalyticsIcon = analyticsStepIcons[activeAnalyticsStep] || Database;
 
   const handleStackTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     let nextTab = index;
@@ -331,10 +343,10 @@ export const ServiceDetailPage: React.FC = () => {
           <DigitalMarketingHero service={service} />
         ) : (
           <section
-            className={`hero-clay-canvas py-section relative overflow-hidden${heroStyle ? ` ${heroStyle} isolate` : ''}${isBusinessAnalyticsPage ? ' business-analytics-hero business-analytics-video-hero service-video-hero isolate' : ''}`}
+            className={`hero-clay-canvas py-section relative overflow-hidden${heroStyle ? ` ${heroStyle} isolate` : ''}${isBusinessAnalyticsPage ? ' business-analytics-hero business-analytics-video-hero service-video-hero isolate' : ''}${isEnterpriseSolutionsHero ? ' enterprise-solutions-video-hero service-video-hero isolate' : ''}${isITConsultingHero ? ' it-consulting-video-hero isolate' : ''}${isWebDesignHero ? ' web-design-video-hero isolate' : ''}`}
           >
             <div
-              className={`${isBusinessAnalyticsPage ? 'business-analytics-hero__content max-w-7xl' : 'max-w-7xl'} mx-auto px-4 sm:px-6 lg:px-8 relative z-10${heroStyle ? ` ${heroStyle}-content` : ''}`}
+              className={`${isBusinessAnalyticsPage ? 'business-analytics-hero__content max-w-7xl' : 'max-w-7xl'} mx-auto px-4 sm:px-6 lg:px-8 relative z-10${heroStyle ? ` ${heroStyle}-content` : ''}${isEnterpriseSolutionsHero ? ' enterprise-solutions-video-hero-content' : ''}${isITConsultingHero ? ' it-consulting-video-hero-content' : ''}${isWebDesignHero ? ' web-design-video-hero-content' : ''}`}
             >
               <Breadcrumbs
                 items={[
@@ -344,7 +356,7 @@ export const ServiceDetailPage: React.FC = () => {
               />
 
               <div
-                className={`${heroStyle ? `${heroStyle}-copy ` : ''}mt-8 grid grid-cols-1 ${
+                className={`${heroStyle ? `${heroStyle}-copy ` : ''}${isEnterpriseSolutionsHero ? 'enterprise-solutions-video-hero-layout ' : ''}${isITConsultingHero ? 'it-consulting-video-hero-layout ' : ''}${isWebDesignHero ? 'web-design-video-hero-layout ' : ''}mt-8 grid grid-cols-1 ${
                   isBusinessAnalyticsPage ? 'md:grid-cols-12' : 'lg:grid-cols-12'
                 } gap-10 items-center`}
               >
@@ -355,9 +367,15 @@ export const ServiceDetailPage: React.FC = () => {
                     transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.05, ease: [0.22, 1, 0.36, 1] }}
                     className="business-analytics-hero__copy md:col-span-6 lg:col-span-6"
                   >
-                    <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-foreground tracking-tight leading-tight text-balance">
-                      {businessAnalyticsHeroTitle}
-                    </h1>
+                    <motion.h1
+                      className="font-display text-4xl sm:text-5xl font-extrabold text-foreground tracking-tight leading-tight text-balance"
+                      initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, amount: 0.35 }}
+                      transition={{ duration: reducedMotion ? 0 : 0.63, ease: [0.32, 0.72, 0, 1] }}
+                    >
+                      <ScrollRevealText text={businessAnalyticsHeroTitle} preserveLayout />
+                    </motion.h1>
                     <p className="text-base text-muted leading-relaxed">
                       {businessAnalyticsHeroDescription}
                     </p>
@@ -376,24 +394,71 @@ export const ServiceDetailPage: React.FC = () => {
                     initial={reducedMotion ? false : { opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.05, ease: [0.22, 1, 0.36, 1] }}
-                    className="space-y-5 lg:col-span-7"
+                    className={`space-y-5 ${isEnterpriseSolutionsHero ? 'lg:col-span-6 enterprise-solutions-video-hero-copy' : isITConsultingHero ? 'lg:col-span-6 it-consulting-video-hero-copy' : isWebDesignHero ? 'lg:col-span-6 web-design-video-hero-copy' : 'lg:col-span-7'}`}
                   >
-                    <div className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-accent">
-                      {service.badge || 'Prakvi Service'}
-                    </div>
-                    <h1 className="font-display text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold text-foreground tracking-tight leading-[1.1] text-balance">
-                      <ScrollRevealText text={service.title} highlight={service.title} />
-                    </h1>
-                    {!hasSectionLinks && (
+                    {!isWebDesignHero && !isITConsultingHero && !isEnterpriseSolutionsHero && (
+                      <div className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-accent">
+                        {service.badge || 'Prakvi Service'}
+                      </div>
+                    )}
+                    <motion.h1
+                      className="font-display text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold text-foreground tracking-tight leading-[1.1] text-balance"
+                      initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, amount: 0.35 }}
+                      transition={{ duration: reducedMotion ? 0 : 0.63, ease: [0.32, 0.72, 0, 1] }}
+                    >
+                      {isTargetSectionRemovalPage
+                        ? <ScrollRevealText
+                            text={isWebDesignHero ? webDesignHeroTitle : service.tagline}
+                            preserveLayout
+                          />
+                        : isWebDesignHero
+                        ? webDesignHeroTitle
+                        : isITConsultingHero || isEnterpriseSolutionsHero
+                        ? service.tagline
+                        : <ScrollRevealText text={service.title} highlight={service.title} />}
+                    </motion.h1>
+                    {!isWebDesignHero && !hasSectionLinks && !isITConsultingHero && !isEnterpriseSolutionsHero && (
                       <p className="text-lg sm:text-xl font-semibold text-accent">
                         {service.tagline}
                       </p>
                     )}
                     <p className="text-base text-muted leading-relaxed">
-                      {service.fullDesc}
+                      {isWebDesignHero ? webDesignHeroDescription : service.fullDesc}
                     </p>
                     <div className="pt-2 flex flex-wrap gap-4">
-                      {hasSectionLinks ? (
+                      {isWebDesignHero ? (
+                        <>
+                          <a href="https://prakvi.com/web-design.html#services" className="btn-primary">
+                            <span>Explore Services</span>
+                            <ArrowRight className="arrow-shift" aria-hidden="true" />
+                          </a>
+                          <a href="https://prakvi.com/web-design.html#process" className="btn-secondary">
+                            <span>Our Process</span>
+                          </a>
+                        </>
+                      ) : isEnterpriseSolutionsHero ? (
+                        <>
+                          <a href="https://prakvi.com/enterprise-solution.html#services" className="btn-primary">
+                            <span>Explore Services</span>
+                            <ArrowRight className="arrow-shift" aria-hidden="true" />
+                          </a>
+                          <a href="https://prakvi.com/enterprise-solution.html#process" className="btn-secondary">
+                            <span>Our Process</span>
+                          </a>
+                        </>
+                      ) : isITConsultingHero ? (
+                        <>
+                          <a href="https://prakvi.com/it-Consulting.html#services" className="btn-primary">
+                            <span>Explore Services</span>
+                            <ArrowRight className="arrow-shift" aria-hidden="true" />
+                          </a>
+                          <a href="https://prakvi.com/it-Consulting.html#process" className="btn-secondary">
+                            <span>Our Process</span>
+                          </a>
+                        </>
+                      ) : hasSectionLinks ? (
                         <>
                           <a href="#capabilities" onClick={followSectionLink} className="btn-primary">Explore Services</a>
                           <a
@@ -419,7 +484,7 @@ export const ServiceDetailPage: React.FC = () => {
                   </motion.div>
                 )}
 
-                {!isBusinessAnalyticsPage && !digitalMarketingHero && !mobileAppHero && !cloudServicesHero && (
+                {!isBusinessAnalyticsPage && !digitalMarketingHero && !mobileAppHero && !cloudServicesHero && !isEnterpriseSolutionsHero && !isITConsultingHero && !isWebDesignHero && (
                   <motion.div
                     initial={reducedMotion ? false : { opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -438,23 +503,31 @@ export const ServiceDetailPage: React.FC = () => {
                 )}
               </div>
             </div>
-            {(heroStyle || isBusinessAnalyticsPage) && (
+            {(heroStyle || isBusinessAnalyticsPage || isEnterpriseSolutionsHero || isITConsultingHero || isWebDesignHero) && (
               <ServiceHeroMedia
-                key={heroStyle || 'business-analytics'}
+                key={heroStyle || (isBusinessAnalyticsPage ? 'business-analytics' : isEnterpriseSolutionsHero ? 'enterprise-solutions' : isITConsultingHero ? 'it-consulting' : 'web-design')}
                 videoRef={heroVideo}
                 autoPlay={!reducedMotion && !digitalMarketingHero}
-                extendRightEdge={Boolean(heroStyle) && !digitalMarketingHero && !mobileAppHero}
+                extendRightEdge={(Boolean(heroStyle) && !digitalMarketingHero && !mobileAppHero) || isEnterpriseSolutionsHero || isITConsultingHero || isWebDesignHero}
                 sampleEdges={!isBusinessAnalyticsPage}
                 poster={isBusinessAnalyticsPage
                   ? `${import.meta.env.BASE_URL}videos/data-analytics-poster.webp`
-                  : `${import.meta.env.BASE_URL}videos/${service.slug}-poster.webp`}
-                preload={reducedMotion ? 'none' : 'metadata'}
+                  : isITConsultingHero || isEnterpriseSolutionsHero
+                    ? undefined
+                    : isWebDesignHero
+                      ? undefined
+                      : `${import.meta.env.BASE_URL}videos/${service.slug}-poster.webp`}
+                preload={reducedMotion ? 'none' : isEnterpriseSolutionsHero || isITConsultingHero || isWebDesignHero ? 'auto' : 'metadata'}
               >
                 {!reducedMotion && (
                   <source
                     src={isBusinessAnalyticsPage
                       ? `${import.meta.env.BASE_URL}assets/aistudio/business-analytics-hero.mp4`
-                      : `${import.meta.env.BASE_URL}videos/${service.slug}.mp4`}
+                      : isEnterpriseSolutionsHero
+                        ? `${import.meta.env.BASE_URL}videos/enterprise-solutions.mp4`
+                        : isWebDesignHero
+                        ? `${import.meta.env.BASE_URL}videos/web-design.mp4`
+                        : `${import.meta.env.BASE_URL}videos/${service.slug}.mp4`}
                     type="video/mp4"
                   />
                 )}
@@ -465,7 +538,7 @@ export const ServiceDetailPage: React.FC = () => {
 
         {/* 2. CHALLENGE & APPROACH */}
         {!isEnterpriseArchitecturePage && (
-        isMobilityPage ? <MobilityPracticeSections /> : service.slug === 'supply-chain-management' ? <SupplyChainSections /> : service.slug === 'system-integration' ? <SystemIntegrationSections /> : service.slug === 'project-management' ? <ProjectManagementSections /> : (
+        isMobilityPage ? <MobilityPracticeSections /> : service.slug === 'supply-chain-management' ? <SupplyChainSections /> : service.slug === 'system-integration' ? <ProjectManagementSections /> : (
         <>
         {!isEnterpriseArchitecturePage && !isBusinessAnalyticsPage && !isTargetSectionRemovalPage && !cloudServicesHero && !isInfrastructurePage && !digitalMarketingHero && !mobileAppHero && (
         <section className="py-section bg-canvas">
@@ -531,7 +604,68 @@ export const ServiceDetailPage: React.FC = () => {
             description={offeringsDescription}
             capabilities={service.capabilities}
             align="center"
+            animateHeadingWords
+            capabilityHighlights={service.capabilities.map(() => [])}
           />
+        ) : isEnterpriseSolutionPage ? (
+          <BusinessAnalyticsCarousel
+            title={offeringsTitle}
+            description={offeringsDescription}
+            capabilities={service.capabilities}
+            align="center"
+            animateHeadingWords
+            carouselLabel="Enterprise solution capabilities"
+            capabilityIcons={[Code2, Monitor, ShoppingBag, Plug, Database, ShieldCheck]}
+            capabilityHighlights={[
+              [
+                'Custom functionality development',
+                'Scalable architecture design',
+                'Performance optimization',
+                'Security implementation',
+                'Third-party integrations',
+              ],
+              [
+                'Mobile-first approach',
+                'Cross-browser compatibility',
+                'Touch-friendly interfaces',
+                'Fast loading speeds',
+                'SEO-optimized structure',
+              ],
+              [
+                'Payment gateway integration',
+                'Inventory management',
+                'Order tracking system',
+                'Customer analytics',
+                'Multi-currency support',
+              ],
+              [
+                'RESTful API design',
+                'GraphQL implementation',
+                'Microservices architecture',
+                'API documentation',
+                'Rate limiting & security',
+              ],
+              [
+                'Database architecture',
+                'Performance optimization',
+                'Data migration services',
+                'Backup & recovery',
+                'Security implementation',
+              ],
+              [
+                'Regular updates & patches',
+                'Performance monitoring',
+                'Security audits',
+                'Bug fixes & improvements',
+                '24/7 technical support',
+              ],
+            ]}
+            sectionClassName="enterprise-solutions-carousel"
+          />
+        ) : service.slug === 'web-design' ? (
+          <WebDesignExpertiseCarousel />
+        ) : service.slug === 'it-consulting' ? (
+          <ITConsultingApproach />
         ) : cloudServicesHero ? (
           <CloudServicesSections service={service} />
         ) : isInfrastructurePage ? (
@@ -544,6 +678,9 @@ export const ServiceDetailPage: React.FC = () => {
                 badge="Capabilities"
                 title={offeringsTitle}
                 description={offeringsDescription}
+                animateWords={isTargetSectionRemovalPage}
+                animateWordsOnce={false}
+                revealOnScrollBothDirections={isTargetSectionRemovalPage}
               />
               <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {service.capabilities.map((cap, idx) => (
@@ -570,7 +707,43 @@ export const ServiceDetailPage: React.FC = () => {
         {/* 5. METHODOLOGY / DELIVERY PROCESS */}
         {isEnterpriseArchitecturePage ? (
           <EnterpriseArchitectureJourney title={processTitle} description={processDescription} steps={service.deliverySteps} />
-        ) : (isBusinessAnalyticsPage || (!hasDedicatedServiceSections && !cloudServicesHero && !isInfrastructurePage)) && (
+        ) : service.slug === 'it-consulting' ? (
+          <EnterpriseArchitectureJourney
+            sectionId="it-consulting-process"
+            className="it-consulting-journey"
+            ariaLabel="IT Consulting"
+            stepsLabel="IT Consulting workflow steps"
+            title={processTitle}
+            description={processDescription}
+            steps={service.deliverySteps}
+            stageDuration={3000}
+            traceOnScroll
+          />
+        ) : service.slug === 'web-design' ? (
+          <EnterpriseArchitectureJourney
+            sectionId="web-design-process"
+            className="web-design-journey"
+            ariaLabel="Web Design"
+            stepsLabel="Web Design workflow steps"
+            title={processTitle}
+            description={processDescription}
+            steps={service.deliverySteps}
+            stageDuration={3000}
+            traceOnScroll
+          />
+        ) : isEnterpriseSolutionPage ? (
+          <EnterpriseArchitectureJourney
+            sectionId="enterprise-solutions-process"
+            className="enterprise-solutions-journey"
+            ariaLabel="Enterprise Solutions"
+            stepsLabel="Enterprise Solutions workflow steps"
+            title={processTitle}
+            description={processDescription}
+            steps={service.deliverySteps}
+            stageDuration={3000}
+            traceOnScroll
+          />
+        ) : (isBusinessAnalyticsPage || (!hasDedicatedServiceSections && !cloudServicesHero && !isInfrastructurePage)) ? (
         <section id={isEnterpriseArchitecturePage ? 'enterprise-process' : isBusinessAnalyticsPage ? 'process' : undefined} className={`py-section ${isMobilityPage ? 'bg-surface/75' : 'bg-canvas'}${isBusinessAnalyticsPage ? ' business-analytics-process' : ''}`}>
           <div className={`${isBusinessAnalyticsPage ? 'max-w-[1380px]' : 'max-w-7xl'} mx-auto px-4 sm:px-6 lg:px-8`}>
             {isBusinessAnalyticsPage ? (
@@ -796,13 +969,14 @@ export const ServiceDetailPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            ) : <div
-              className={`mt-12 grid grid-cols-1 gap-5 ${
-                service.deliverySteps.length <= 5
-                  ? 'md:grid-cols-2 lg:grid-cols-5'
-                  : 'md:grid-cols-2 lg:grid-cols-3'
-              }`}
-            >
+            ) : (
+              <div
+                className={`mt-12 grid grid-cols-1 gap-5 ${
+                  service.deliverySteps.length <= 5
+                    ? 'md:grid-cols-2 lg:grid-cols-5'
+                    : 'md:grid-cols-2 lg:grid-cols-3'
+                }`}
+              >
               {service.deliverySteps.map((step, idx) => (
                 <div
                   key={idx}
@@ -824,11 +998,12 @@ export const ServiceDetailPage: React.FC = () => {
                   </div>
                 </div>
               ))}
-            </div>}
+              </div>
+            )}
 
           </div>
         </section>
-        )}
+        ) : null}
 
         {/* 6. INTERACTIVE STACK & CAPABILITY MATRIX */}
         {isEnterpriseArchitecturePage ? (
@@ -837,12 +1012,33 @@ export const ServiceDetailPage: React.FC = () => {
           <section className="py-section bg-canvas">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <SectionHeading
-                badge="Capabilities & Stack"
+                badge={
+                  service.slug === 'business-analytics'
+                  || service.slug === 'it-consulting'
+                  || service.slug === 'web-design'
+                  || service.slug === 'enterprise-solution'
+                    ? undefined
+                    : 'Capabilities & Stack'
+                }
                 title={service.stackTitle || service.title}
                 description={service.stackSummary}
                 align="center"
+                animateWords={isTargetSectionRemovalPage}
+                animateWordsOnce={false}
+                revealOnScrollBothDirections={isTargetSectionRemovalPage}
               />
 
+              {service.slug === 'it-consulting' ? (
+                <ITConsultingStack categories={stackTabs} />
+              ) : service.slug === 'web-design' ? (
+                <WebDesignStack
+                  categories={stackTabs}
+                  activeIndex={activeStackIndex}
+                  onActiveIndexChange={setActiveStackTab}
+                />
+              ) : isEnterpriseSolutionPage ? (
+                <EnterpriseSolutionsStack categories={stackTabs} />
+              ) : (
               <div className={isBusinessAnalyticsPage ? '' : 'mt-10 clay-card p-6 sm:p-10'}>
                 {!isBusinessAnalyticsPage && (
                   <>
@@ -918,9 +1114,7 @@ export const ServiceDetailPage: React.FC = () => {
                 </AnimatePresence>
                   </>
                 )}
-              <div
-                className={isBusinessAnalyticsPage ? 'ea-carousel-interaction' : 'mt-10 clay-card p-6 sm:p-10'}
-              >
+              <div className={isBusinessAnalyticsPage ? 'ea-carousel-interaction' : 'mt-10 clay-card p-6 sm:p-10'}>
                 {isBusinessAnalyticsPage ? (
                   <>
                     <div className="ea-category-navigation">
@@ -1061,12 +1255,13 @@ export const ServiceDetailPage: React.FC = () => {
                 )}
               </div>
             </div>
+              )}
           </div>
           </section>
         )}
 
         {/* 7. BUSINESS BENEFITS */}
-        {!standardizedServiceSlugs.has(service.slug) && (
+        {!standardizedServiceSlugs.has(service.slug) && !isTargetSectionRemovalPage && (
         <>
         <section className="py-section bg-canvas">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1156,7 +1351,7 @@ export const ServiceDetailPage: React.FC = () => {
         </section>
 
         {/* CTA */}
-        {service.slug !== 'accounting' && serviceCta}
+        {service.slug !== 'accounting' && !isTargetSectionRemovalPage && serviceCta}
         </>
         )}
       </div>

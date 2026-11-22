@@ -179,6 +179,8 @@ function StageClock({ tick }: { tick: (delta: number) => void }) {
 
 interface EnterpriseArchitectureJourneyProps {
   sectionId?: string;
+  className?: string;
+  stageDuration?: number;
   stepsLabel?: string;
   icons?: LucideIcon[];
   traceOnScroll?: boolean;
@@ -188,7 +190,7 @@ interface EnterpriseArchitectureJourneyProps {
   ariaLabel?: string;
 }
 
-export function EnterpriseArchitectureJourney({ title, description, steps, ariaLabel = 'Enterprise Architecture', sectionId = 'enterprise-process', stepsLabel, icons = stepIcons, traceOnScroll = false }: EnterpriseArchitectureJourneyProps) {
+export function EnterpriseArchitectureJourney({ title, description, steps, ariaLabel = 'Enterprise Architecture', sectionId = 'enterprise-process', className, stageDuration: journeyStageDuration = stageDuration, stepsLabel, icons = stepIcons, traceOnScroll = false }: EnterpriseArchitectureJourneyProps) {
   const id = useId();
   const workspace = useRef<HTMLDivElement>(null);
   const route = useRef<HTMLDivElement>(null);
@@ -221,7 +223,7 @@ export function EnterpriseArchitectureJourney({ title, description, steps, ariaL
   }, []);
 
   const tick = useCallback((delta: number) => {
-    const next = progress.get() + delta / stageDuration;
+    const next = progress.get() + delta / journeyStageDuration;
     progress.set(next % 1);
     if (next >= 1) setActive(current => (current + 1) % steps.length);
   }, [progress, steps.length]);
@@ -263,7 +265,7 @@ export function EnterpriseArchitectureJourney({ title, description, steps, ariaL
   };
 
   return (
-    <section id={sectionId} className="ea-journey" aria-labelledby={`${id}-title`} tabIndex={sectionId !== 'enterprise-process' ? -1 : undefined}
+    <section id={sectionId} className={`ea-journey${className ? ` ${className}` : ''}`} aria-labelledby={`${id}-title`} tabIndex={sectionId !== 'enterprise-process' ? -1 : undefined}
       data-moving={moving} data-extended={extended || undefined}>
       {/* Scroll reveals run independently from the route entrance on direct visits. */}
       <AnimatePresence>

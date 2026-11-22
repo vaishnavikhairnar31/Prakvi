@@ -1,0 +1,172 @@
+.service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero {
+  --service-hero-start: 39%;
+  --service-hero-right: 1rem;
+  --service-hero-vertical-space: 2rem;
+  --service-hero-fade: linear-gradient(
+    to right,
+    transparent 0%,
+    #0001 4%,
+    #0005 14%,
+    #000c 27%,
+    #000 36%
+  );
+  --service-hero-mobile-fade: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #0007 8%,
+    #000 20%,
+    #000 84%,
+    #0008 96%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: center;
+  min-height: clamp(42rem, 46vw, 54rem);
+  padding-block: clamp(3rem, 4.5vw, 4.5rem);
+  color: #0b1c3a;
+  background:
+    radial-gradient(ellipse 34% 64% at 79% 45%, rgba(8, 123, 255, 0.2), transparent 80%),
+    radial-gradient(ellipse 24% 43% at 93% 22%, rgba(139, 92, 255, 0.12), transparent 82%),
+    linear-gradient(
+      108deg,
+      #f8fbff 0%,
+      #f1f7ff 35%,
+      #d8e8fb 44%,
+      #7894b9 54%,
+      #1b3c6b 66%,
+      #08265a 81%,
+      #06142f 100%
+    ) !important;
+}
+
+.service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero::before {
+  z-index: 0;
+  opacity: 0.18;
+  background:
+    radial-gradient(circle, rgba(0, 217, 255, 0.23) 0 1px, transparent 1.6px) 0 0 / 190px 170px,
+    radial-gradient(circle, rgba(139, 92, 255, 0.16) 0 1px, transparent 1.6px) 70px 90px / 230px 210px;
+  animation: none;
+}
+
+.service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero::after {
+  content: none !important;
+}
+
+.enterprise-solutions-video-hero-content {
+  width: 100%;
+}
+
+.enterprise-solutions-video-hero-layout {
+  position: relative;
+}
+
+.enterprise-solutions-video-hero-copy {
+  max-width: 46rem;
+}
+
+.enterprise-solutions-video-hero-copy h1 {
+  color: #0b1c3a;
+  font-size: clamp(2.35rem, 3.2vw, 3.75rem);
+  line-height: 1.06;
+}
+
+.enterprise-solutions-video-hero-copy .text-accent {
+  color: #087bff;
+}
+
+.enterprise-solutions-video-hero-copy p {
+  color: #344b68;
+}
+
+.service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero .btn-primary {
+  color: #fff;
+  background: linear-gradient(125deg, #087bff, #145fc9);
+  border-color: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 10px 24px rgba(8, 123, 255, 0.24), inset 0 1px 2px rgba(255, 255, 255, 0.34);
+}
+
+.service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero .btn-primary:hover {
+  color: #fff;
+  background: linear-gradient(125deg, #1688ff, #0d55bd);
+  box-shadow: 0 14px 28px rgba(8, 123, 255, 0.3);
+}
+
+.service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero .btn-secondary {
+  color: #17345b;
+  background: rgba(249, 252, 255, 0.9);
+  border-color: rgba(8, 123, 255, 0.24);
+  box-shadow: 0 8px 20px rgba(6, 20, 47, 0.08);
+}
+
+.service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero .btn-secondary:hover {
+  color: #0b2b55;
+  background: #fff;
+  border-color: rgba(8, 123, 255, 0.42);
+  box-shadow: 0 10px 24px rgba(6, 20, 47, 0.12);
+}
+
+.enterprise-solutions-video-hero .service-hero-media {
+  z-index: 0;
+  animation: enterprise-solutions-video-fade-in 800ms ease-out both;
+}
+
+.enterprise-solutions-video-hero .service-hero-video {
+  background: #06142f;
+}
+
+@keyframes enterprise-solutions-video-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 1023px) {
+  .service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero {
+    display: block;
+    min-height: 0;
+    padding-top: 2.5rem;
+    padding-bottom: 0;
+    background:
+      radial-gradient(ellipse 82% 24% at 76% 76%, rgba(8, 123, 255, 0.18), transparent 78%),
+      linear-gradient(
+        180deg,
+        #f8fbff 0%,
+        #f1f8ff 48%,
+        #dcecff 58%,
+        #345987 73%,
+        #0b2550 86%,
+        #06142f 100%
+      ) !important;
+  }
+
+  .enterprise-solutions-video-hero-content {
+    margin-bottom: 2rem;
+  }
+
+  .enterprise-solutions-video-hero-copy {
+    max-width: 46rem;
+  }
+
+  .enterprise-solutions-video-hero .service-hero-frame {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 639px) {
+  .service-detail-page.service-topic-enterprise-solution > section.enterprise-solutions-video-hero {
+    padding-top: 1.5rem;
+  }
+
+  .enterprise-solutions-video-hero-copy h1 {
+    font-size: 1.875rem;
+  }
+
+  .enterprise-solutions-video-hero-content {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enterprise-solutions-video-hero .service-hero-media {
+    animation: none;
+  }
+}

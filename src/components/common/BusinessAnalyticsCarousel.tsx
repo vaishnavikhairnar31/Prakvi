@@ -165,6 +165,7 @@ export const BusinessAnalyticsCarousel: React.FC<{
   capabilityHighlights?: string[][];
   capabilityIcons?: LucideIcon[];
   updateInfoImmediately?: boolean;
+  animateHeadingWords?: boolean;
 }> = ({
   title,
   description,
@@ -176,6 +177,7 @@ export const BusinessAnalyticsCarousel: React.FC<{
   capabilityHighlights: customCapabilityHighlights,
   capabilityIcons: customCapabilityIcons,
   updateInfoImmediately = false,
+  animateHeadingWords = false,
 }) => {
   const reducedMotion = useReducedMotion();
   const phase = useMotionValue(0);
@@ -317,7 +319,15 @@ export const BusinessAnalyticsCarousel: React.FC<{
   return (
     <section id="capabilities" className={`ba-carousel-section py-section bg-canvas${sectionClassName ? ` ${sectionClassName}` : ''}`}>
       <div id="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
-        <SectionHeading badge={badge} title={title} description={description} align={align} />
+        <SectionHeading
+          badge={badge}
+          title={title}
+          description={description}
+          align={align}
+          animateWords={animateHeadingWords}
+          animateWordsOnce={false}
+          revealOnScrollBothDirections={animateHeadingWords}
+        />
 
         <div
           className="ba-carousel"

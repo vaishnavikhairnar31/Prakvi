@@ -1,0 +1,95 @@
+.enterprise-solutions-carousel .ba-carousel__card[aria-label^="Custom Web Development"] {
+  --ba-start: #f5f0ff;
+  --ba-end: #e4d9f8;
+  --ba-active-start: #eee5ff;
+  --ba-active-end: #d7c6f2;
+  --ba-border: #d0c0eb;
+  --ba-strong: #ac91dc;
+  --ba-glow: rgba(165, 137, 216, 0.18);
+}
+
+.enterprise-solutions-carousel .ba-carousel__card[aria-label^="Responsive Web Design"] {
+  --ba-start: #eef9ff;
+  --ba-end: #cceafa;
+  --ba-active-start: #e3f5ff;
+  --ba-active-end: #b8e1f6;
+  --ba-border: #b5dced;
+  --ba-strong: #78bfdf;
+  --ba-glow: rgba(112, 184, 220, 0.18);
+}
+
+.enterprise-solutions-carousel .ba-carousel__card[aria-label^="E-commerce Solutions"] {
+  --ba-start: #edfbf5;
+  --ba-end: #c8efdf;
+  --ba-active-start: #e1f8ed;
+  --ba-active-end: #afe7d0;
+  --ba-border: #b0dfcb;
+  --ba-strong: #6bc7a3;
+  --ba-glow: rgba(97, 190, 151, 0.18);
+}
+
+.enterprise-solutions-carousel .ba-carousel__card[aria-label^="API Development"] {
+  --ba-start: #fff4ed;
+  --ba-end: #f8d7c7;
+  --ba-active-start: #ffede2;
+  --ba-active-end: #f4c4aa;
+  --ba-border: #edc0a7;
+  --ba-strong: #e69975;
+  --ba-glow: rgba(222, 143, 105, 0.18);
+}
+
+.enterprise-solutions-carousel .ba-carousel__card[aria-label^="Database Design"] {
+  --ba-start: #eff6ff;
+  --ba-end: #cddff7;
+  --ba-active-start: #e5f0ff;
+  --ba-active-end: #bbd4f2;
+  --ba-border: #b8d0eb;
+  --ba-strong: #7eaddb;
+  --ba-glow: rgba(111, 160, 211, 0.18);
+}
+
+.enterprise-solutions-carousel .ba-carousel__card[aria-label^="Maintenance & Support"] {
+  --ba-start: #f6f1ff;
+  --ba-end: #e1d5f8;
+  --ba-active-start: #eee7ff;
+  --ba-active-end: #d5c4f1;
+  --ba-border: #d1c1ec;
+  --ba-strong: #ad94dc;
+  --ba-glow: rgba(165, 140, 216, 0.18);
+}
+
+.enterprise-solutions-carousel .ba-carousel__card.is-active {
+  --ba-start: var(--ba-active-start);
+  --ba-end: var(--ba-active-end);
+}
+
+.enterprise-solutions-journey .ea-journey-node-position {
+  --stage-ink: #3b85b4;
+  --stage-glass: #edf7ff;
+  --stage-line: #bed8ea;
+}
+.enterprise-solutions-journey .ea-journey-node-position:nth-child(even) {
+  --stage-ink: #6575a8;
+  --stage-glass: #f1effa;
+  --stage-line: #c9c9e5;
+}
+.enterprise-solutions-journey .ea-journey-node[aria-selected='true'] {
+  border-color: #e0a17c;
+  box-shadow:
+    inset 0 1px #fff,
+    0 0 0 3px #efc7ae70,
+    0 13px 28px -12px #62acd09e,
+    0 0 22px #68bee34d;
+}
+.enterprise-solutions-journey .ea-journey-track {
+  stroke: #84badb;
+  stroke-opacity: 0.72;
+}
+.enterprise-solutions-journey .ea-journey-track-active {
+  stroke: #65b2d7;
+  filter: drop-shadow(0 0 5px #55b8dfb8);
+}
+.enterprise-solutions-journey .ea-journey-detail li::marker,
+.enterprise-solutions-journey .ea-journey-progress [data-current='true'] span {
+  color: #d08b62;
+}

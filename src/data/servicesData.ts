@@ -1628,32 +1628,52 @@ const serviceCatalog: ServiceItem[] = [
       },
     ],
     processTitle: 'Why Choose Prakvi as Your IT Consulting Partner?',
-    processSubtitle: 'How Prakvi helps clients evolve their technology footprint with clarity and purpose.',
+    processSubtitle: 'Below is a concise overview of how Prakvi approaches IT consulting helping clients evolve their tech footprint with purpose',
     deliverySteps: [
       {
         step: '01',
         title: 'Discovery & Assessment',
-        description: 'Audit current IT systems and capabilities to identify gaps, risks, and business alignment issues.',
+        description: '',
+        points: [
+          'Audit current IT systems and capabilities',
+          'Identify gaps, risks, and business alignment issues',
+        ],
       },
       {
         step: '02',
         title: 'Strategic Planning & Roadmapping',
-        description: 'Define your target IT vision and desired outcomes alongside a clear deployment and transformation roadmap.',
+        description: '',
+        points: [
+          'Define IT vision and desired outcomes',
+          'Develop clear deployment and transformation roadmap',
+        ],
       },
       {
         step: '03',
         title: 'Solution Design & Advisory',
-        description: 'Recommend cloud architectures, security frameworks, governance structures, and optimal tools and platforms.',
+        description: '',
+        points: [
+          'Recommend cloud architectures, security frameworks, governance structures',
+          'Select tools, platforms, and process improvements',
+        ],
       },
       {
         step: '04',
         title: 'Implementation & Governance',
-        description: 'Oversee deployment of IT solutions while enforcing governance, compliance, and policy adherence.',
+        description: '',
+        points: [
+          'Oversee deployment of IT solutions',
+          'Enforce governance, compliance, and policy adherence',
+        ],
       },
       {
         step: '05',
         title: 'Optimization & Continuous Improvement',
-        description: 'Monitor performance against KPIs and provide advisory on scaling, cost efficiency, and next-phase improvements.',
+        description: '',
+        points: [
+          'Monitor performance against KPIs',
+          'Provide advisory on scaling, efficiency, and next-phase improvements',
+        ],
       },
     ],
     stackTitle: 'Information Technology Consulting',
@@ -1811,7 +1831,7 @@ const serviceCatalog: ServiceItem[] = [
     shortDesc:
       'Custom websites, responsive UI/UX design systems, SEO & speed optimization, eCommerce design, and CMS revamps that drive growth.',
     fullDesc:
-      'Your website is more than an online presence—it’s your digital storefront and first impression. Prakvi’s web design services in India create professional, responsive, and visually engaging websites. We deliver custom website design, corporate sites, and eCommerce solutions with fast loading, mobile-friendly layouts, and seamless navigation. From concept to launch, we design websites that reflect your brand and drive business growth.',
+      'Your website is more than an online presence—it\'s your digital storefront and first impression. Prakvi’s web design services in India create professional, responsive, and visually engaging websites. We deliver custom website design, corporate sites, and eCommerce solutions with fast loading,mobile-friendly layouts, and seamless navigation. From concept to launch, we design websites that reflect your brand and drive business growth.',
     iconName: 'PenTool',
     badge: 'Business Solutions · UI/UX',
     offeringsTitle: 'Our Web Design Expertise',
@@ -1870,42 +1890,42 @@ const serviceCatalog: ServiceItem[] = [
       },
     ],
     processTitle: 'Why Choose Prakvi for Web Design?',
-    processSubtitle: 'A 7-stage collaborative design process from discovery to iterative optimization.',
+    processSubtitle: 'A proven methodology that ensures successful project delivery',
     deliverySteps: [
       {
         step: '01',
         title: 'Discovery & Consultation',
-        description: 'Understand your vision, user needs, and business goals through stakeholder interviews, workshops, and market research.',
+        description: 'We begin by understanding your vision, user needs, and business goals through interviews, workshops, and market research.',
       },
       {
         step: '02',
         title: 'Visual Strategy & Information Architecture',
-        description: 'Define site structure, navigation flow, wireframes, typography, visual branding, and color palettes.',
+        description: 'Defining site structure, navigation flow, and high-level wireframes. Establish visual branding, typography, and color palette.',
       },
       {
         step: '03',
         title: 'Design & Prototyping',
-        description: 'Create high-fidelity mockups and clickable prototypes, refining designs through structured feedback loops.',
+        description: 'Creating high-fidelity mockups and clickable prototypes. Refining design through feedback loops until perfection.',
       },
       {
         step: '04',
         title: 'Development Coordination',
-        description: 'Deliver clean specs to development teams ensuring pixel-accurate implementation and responsive behavior across devices.',
+        description: 'Passing finalized visuals to development teams, ensuring pixel-perfect implementation and responsive behavior across devices.',
       },
       {
         step: '05',
         title: 'Quality Assurance & Testing',
-        description: 'Execute rigorous testing of usability, cross-browser compatibility, accessibility compliance, and page performance.',
+        description: 'Rigorous testing of usability, cross-browser/device compatibility, accessibility compliance, and page performance.',
       },
       {
         step: '06',
         title: 'Launch & Deployment',
-        description: 'Deploy your site with secure hosting, SSL certification, analytics instrumentation, and technical SEO setup.',
+        description: 'Deploying your site with secure hosting, SSL certification, analytics setup, and SEO optimizations for visibility.',
       },
       {
         step: '07',
         title: 'Post-Launch Support & Optimization',
-        description: 'Provide ongoing maintenance, content updates, A/B testing, and iterative enhancements informed by analytics.',
+        description: 'Providing maintenance, content updates, A/B testing, and iterative enhancements informed by analytics and user behavior.',
       },
     ],
     stackTitle: 'Web Design Solutions',
@@ -1946,7 +1966,7 @@ const serviceCatalog: ServiceItem[] = [
     iconName: 'Code2',
     badge: 'Business Solutions · Custom Engineering',
     offeringsTitle: 'Our Enterprise Solutions',
-    offeringsSubtitle: 'Comprehensive, scalable, and secure software engineering built for complex modern organizations.',
+    offeringsSubtitle: 'Comprehensive, scalable, and secure solutions designed to meet the complex needs of modern enterprises',
     businessChallenge:
       'Off-the-shelf tools and aging web software restrict custom workflows, struggle under scale, and create integration bottlenecks.',
     howWeHelp:
@@ -1954,32 +1974,32 @@ const serviceCatalog: ServiceItem[] = [
     capabilities: [
       {
         title: 'Custom Web Development',
-        description: 'Build unique, scalable web applications with custom functionality, security, and third-party integrations.',
+        description: 'Build unique, scalable web applications tailored to your specific business requirements using modern technologies.',
         icon: 'Code2',
       },
       {
         title: 'Responsive Web Design',
-        description: 'Mobile-first, cross-browser, touch-friendly interfaces engineered for fast loading and SEO clarity.',
+        description: 'Create stunning, mobile-first websites that provide optimal user experience across all devices and screen sizes.',
         icon: 'Monitor',
       },
       {
         title: 'E-commerce Solutions',
-        description: 'Powerful storefronts featuring payment gateway integration, inventory tracking, order management, and multi-currency support.',
+        description: 'Develop powerful online stores with secure payment processing, inventory management, and customer analytics.',
         icon: 'ShoppingBag',
       },
       {
         title: 'API Development',
-        description: 'Robust RESTful APIs, GraphQL endpoints, microservices architecture, rate limiting, and full technical documentation.',
+        description: 'Build robust RESTful APIs and microservices to power your applications and enable seamless integrations.',
         icon: 'Plug',
       },
       {
         title: 'Database Design',
-        description: 'High-performance database architecture, migration services, automated backups, and data integrity controls.',
+        description: 'Design and optimize database structures for maximum performance, scalability, and data integrity.',
         icon: 'Database',
       },
       {
         title: 'Maintenance & Support',
-        description: 'Continuous updates, security patches, audits, performance monitoring, and 24/7 technical support.',
+        description: 'Ongoing maintenance, updates, and technical support to keep your web applications running smoothly.',
         icon: 'ShieldCheck',
       },
     ],
@@ -2001,53 +2021,52 @@ const serviceCatalog: ServiceItem[] = [
       },
     ],
     processTitle: 'Why Choose Prakvi for Enterprise Solutions?',
-    processSubtitle: 'A proven 6-stage engineering methodology from discovery to post-launch care.',
+    processSubtitle: 'A proven methodology that ensures successful project delivery',
     deliverySteps: [
       {
         step: '01',
         title: 'Discovery & Planning',
         description:
-          'Understand business goals, target audience, and technical requirements through research, competitor analysis, and project roadmapping.',
+          'We start by understanding your business goals, target audience, and technical requirements. This phase includes market research, competitor analysis, and creating a detailed project roadmap.',
       },
       {
         step: '02',
         title: 'Design & Prototyping',
         description:
-          'Create wireframes, mockups, and interactive prototypes aligned with brand identity and intuitive user experience.',
+          'Our design team creates wireframes, mockups, and interactive prototypes. We focus on user experience, visual appeal, and ensuring the design aligns with your brand identity.',
       },
       {
         step: '03',
         title: 'Development & Coding',
         description:
-          'Use agile sprints to build clean, scalable application modules iteratively with transparent client communication.',
+          'Using agile methodology, our developers build your application with clean, scalable code. We implement features iteratively and maintain constant communication throughout the process.',
       },
       {
         step: '04',
         title: 'Testing & Quality Assurance',
         description:
-          'Execute comprehensive functional, cross-device, performance, and security testing before production release.',
+          'Comprehensive testing ensures your application works flawlessly across all devices and browsers. We perform functional, performance, and security testing before deployment.',
       },
       {
         step: '05',
         title: 'Deployment & Launch',
         description:
-          'Handle complete server provisioning, domain configuration, live monitoring, and automated backup verification.',
+          'We handle the entire deployment process, from server setup to domain configuration. Your application goes live with proper monitoring and backup systems in place.',
       },
       {
         step: '06',
         title: 'Maintenance & Support',
         description:
-          'Deliver ongoing updates, security patches, performance tuning, and feature enhancements driven by analytics and user feedback.',
+          'Post-launch support includes regular updates, performance monitoring, security patches, and feature enhancements based on user feedback and analytics.',
       },
     ],
     stackTitle: 'Technology Stack',
-    stackSummary:
-      'We use cutting-edge technologies to build modern, scalable applications engineered for performance and security.',
+    stackSummary: 'We use cutting-edge technologies to build modern, scalable applications',
     stackTabs: [
       { label: 'Frontend', items: ['React', 'Vue.js', 'Angular', 'JavaScript', 'HTML5', 'CSS3'] },
       { label: 'Backend', items: ['Node.js', 'Python', 'PHP', 'Java', 'Ruby', '.NET'] },
       { label: 'Database', items: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Firebase', 'SQLite'] },
-      { label: 'Tools & Cloud', items: ['Git', 'Docker', 'AWS', 'Azure', 'Google Cloud', 'Nginx'] },
+      { label: 'Tools', items: ['Git', 'Docker', 'AWS', 'Azure', 'Google Cloud', 'Nginx'] },
     ],
     faqs: [
       {

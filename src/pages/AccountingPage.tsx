@@ -21,6 +21,7 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { BusinessAnalyticsCarousel } from '../components/common/BusinessAnalyticsCarousel';
 import { BusinessAnalyticsStackOrbit } from '../components/common/BusinessAnalyticsStackOrbit';
 import { SectionHeading } from '../components/common/SectionHeading';
+import { ScrollRevealText } from '../components/common/ScrollRevealText';
 import { ServiceHeroMedia } from '../components/common/ServiceHeroMedia';
 import { PageTransition } from '../components/layout/PageTransition';
 import { servicesData } from '../data/servicesData';
@@ -97,17 +98,12 @@ export const AccountingPage: React.FC = () => {
   useEffect(() => {
     const video = heroVideo.current;
     if (!video) return;
-    if (reducedMotion) {
-      video.pause();
-      return;
-    }
-
     void video.play().catch((error: unknown) => {
       if (error instanceof Error && (error.name === 'AbortError' || error.name === 'NotAllowedError')) return;
       console.error('Accounting hero video playback failed.', error);
     });
     return () => video.pause();
-  }, [reducedMotion]);
+  }, []);
 
   useEffect(() => {
     if (reducedMotion) {
@@ -165,19 +161,25 @@ export const AccountingPage: React.FC = () => {
                 transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.05, ease: [0.22, 1, 0.36, 1] }}
                 className="accounting-video-hero__copy md:col-span-6 lg:col-span-6"
               >
-                <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-foreground tracking-tight leading-tight text-balance">
-                  {service.tagline}
-                </h1>
+                <motion.h1
+                  className="font-display text-4xl sm:text-5xl font-extrabold text-foreground tracking-tight leading-tight text-balance"
+                  initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.35 }}
+                  transition={{ duration: reducedMotion ? 0 : 0.63, ease: [0.32, 0.72, 0, 1] }}
+                >
+                  <ScrollRevealText text={service.tagline} preserveLayout />
+                </motion.h1>
                 <p className="text-base text-muted leading-relaxed">
                   {service.fullDesc}
                 </p>
 
                 <div className="pt-2 flex flex-wrap gap-4">
-                  <Link to="/contact" className="btn-primary">
+                  <a href="https://prakvi.com/accounting.html#services" className="btn-primary">
                     <span>Explore Services</span>
                     <ArrowRight className="arrow-shift" aria-hidden="true" />
-                  </Link>
-                  <a href="#capabilities" className="btn-secondary">
+                  </a>
+                  <a href="https://prakvi.com/accounting.html#process" className="btn-secondary">
                     <span>Our Process</span>
                   </a>
                 </div>
@@ -187,16 +189,14 @@ export const AccountingPage: React.FC = () => {
 
           <ServiceHeroMedia
             videoRef={heroVideo}
-            autoPlay={!reducedMotion}
-            preload={reducedMotion ? 'none' : 'metadata'}
+            autoPlay
+            preload="auto"
             sampleEdges={false}
           >
-            {!reducedMotion && (
-              <source
-                src={`${import.meta.env.BASE_URL}videos/accounting-hero.mp4`}
-                type="video/mp4"
-              />
-            )}
+            <source
+              src={`${import.meta.env.BASE_URL}videos/accounting-hero.mp4`}
+              type="video/mp4"
+            />
           </ServiceHeroMedia>
         </section>
 
@@ -204,9 +204,9 @@ export const AccountingPage: React.FC = () => {
           title={service.offeringsTitle || `${service.title} Offerings`}
           description={service.offeringsSubtitle || 'Comprehensive service modules engineered for reliability, compliance, and long-term performance.'}
           capabilities={service.capabilities}
-          badge="Capabilities"
           align="center"
           carouselLabel="Accounting services"
+          animateHeadingWords
           updateInfoImmediately
           capabilityHighlights={[
             ['simplified ledgers', 'real-time reporting', 'clean journal records'],
@@ -221,9 +221,18 @@ export const AccountingPage: React.FC = () => {
         <section id="process" className="py-section bg-canvas business-analytics-process accounting-process-workflow">
           <div className="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="business-analytics-process__intro">
-              <h2 className="business-analytics-process__heading">
-                {service.processTitle || `Why Choose Prakvi for ${service.title}?`}
-              </h2>
+              <motion.h2
+                className="business-analytics-process__heading"
+                initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.35 }}
+                transition={{ duration: reducedMotion ? 0 : 0.63, ease: [0.32, 0.72, 0, 1] }}
+              >
+                <ScrollRevealText
+                  text={service.processTitle || `Why Choose Prakvi for ${service.title}?`}
+                  preserveLayout
+                />
+              </motion.h2>
               <p className="business-analytics-process__subtitle">
                 {service.processSubtitle || 'A proven methodology that ensures successful project delivery.'}
               </p>
@@ -449,10 +458,12 @@ export const AccountingPage: React.FC = () => {
         <section className="py-section bg-canvas">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading
-              badge="Capabilities & Stack"
               title={service.stackTitle || service.title}
               description={service.stackSummary}
               align="center"
+              animateWords
+              animateWordsOnce={false}
+              revealOnScrollBothDirections
             />
 
             <div

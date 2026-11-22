@@ -1,0 +1,160 @@
+.service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero {
+  --service-hero-start: 45%;
+  --service-hero-right: 1rem;
+  --service-hero-vertical-space: 2rem;
+  --service-hero-fade: linear-gradient(
+    to right,
+    transparent 0%,
+    #0001 8%,
+    #0005 18%,
+    #000c 29%,
+    #000 36%
+  );
+  --service-hero-mobile-fade: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #0007 8%,
+    #000 20%,
+    #000 84%,
+    #0008 96%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: center;
+  min-height: clamp(40rem, 42vw, 48rem);
+  padding-block: clamp(3rem, 4.5vw, 4.5rem);
+  color: #0b1c3a;
+  background:
+    radial-gradient(ellipse 36% 68% at 78% 45%, rgba(8, 123, 255, 0.2), transparent 78%),
+    radial-gradient(ellipse 28% 54% at 93% 24%, rgba(139, 92, 255, 0.14), transparent 80%),
+    linear-gradient(
+      108deg,
+      #f8fbff 0%,
+      #f2f8ff 38%,
+      #dcecff 44%,
+      #7893b8 54%,
+      #17335f 66%,
+      #06142f 82%,
+      #06142f 100%
+    ) !important;
+}
+
+.service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero::before {
+  z-index: 0;
+  opacity: 0.22;
+  background:
+    radial-gradient(circle, rgba(0, 217, 255, 0.24) 0 1px, transparent 1.6px) 0 0 / 190px 170px,
+    radial-gradient(circle, rgba(139, 92, 255, 0.2) 0 1px, transparent 1.6px) 70px 90px / 230px 210px;
+  animation: none;
+}
+
+.service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero::after {
+  content: none;
+}
+
+.it-consulting-video-hero-content {
+  width: 100%;
+}
+
+.it-consulting-video-hero-layout {
+  position: relative;
+}
+
+.it-consulting-video-hero-copy {
+  max-width: 46rem;
+}
+
+.it-consulting-video-hero-copy h1 {
+  color: #0b1c3a;
+}
+
+.it-consulting-video-hero-copy .text-accent {
+  color: #087bff;
+}
+
+.it-consulting-video-hero-copy p {
+  color: #344b68;
+}
+
+@media (min-width: 1024px) {
+  .it-consulting-video-hero-copy h1 {
+    font-size: clamp(2.5rem, 2.95vw, 2.625rem);
+  }
+}
+
+.service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero .btn-primary {
+  color: #fff;
+  background: linear-gradient(125deg, #087bff, #145fc9);
+  border-color: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 10px 24px rgba(8, 123, 255, 0.24), inset 0 1px 2px rgba(255, 255, 255, 0.34);
+}
+
+.service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero .btn-primary:hover {
+  color: #fff;
+  background: linear-gradient(125deg, #1688ff, #0d55bd);
+  box-shadow: 0 14px 28px rgba(8, 123, 255, 0.3);
+}
+
+.service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero .btn-secondary {
+  color: #17345b;
+  background: rgba(249, 252, 255, 0.9);
+  border-color: rgba(8, 123, 255, 0.24);
+  box-shadow: 0 8px 20px rgba(6, 20, 47, 0.08);
+}
+
+.service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero .btn-secondary:hover {
+  color: #0b2b55;
+  background: #fff;
+  border-color: rgba(8, 123, 255, 0.42);
+  box-shadow: 0 10px 24px rgba(6, 20, 47, 0.12);
+}
+
+.it-consulting-video-hero .service-hero-media {
+  z-index: 0;
+}
+
+.it-consulting-video-hero .service-hero-video {
+  background: #06142f;
+}
+
+@media (max-width: 1023px) {
+  .service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero {
+    display: block;
+    min-height: 0;
+    padding-top: 2.5rem;
+    padding-bottom: 0;
+    background:
+      radial-gradient(ellipse 82% 24% at 76% 76%, rgba(8, 123, 255, 0.18), transparent 78%),
+      linear-gradient(
+        180deg,
+        #f8fbff 0%,
+        #f1f8ff 48%,
+        #dcecff 58%,
+        #345987 73%,
+        #0b2550 86%,
+        #06142f 100%
+      ) !important;
+  }
+
+  .it-consulting-video-hero-content {
+    margin-bottom: 2rem;
+  }
+
+  .it-consulting-video-hero-copy {
+    max-width: 46rem;
+  }
+
+  .it-consulting-video-hero .service-hero-frame {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 639px) {
+  .service-detail-page.service-topic-it-consulting > section.it-consulting-video-hero {
+    padding-top: 1.5rem;
+  }
+
+  .it-consulting-video-hero-content {
+    margin-bottom: 1.5rem;
+  }
+}

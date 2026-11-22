@@ -15,6 +15,7 @@ interface SectionHeadingProps {
   animate?: boolean;
   animateWords?: boolean;
   animateWordsOnce?: boolean;
+  revealOnScrollBothDirections?: boolean;
 }
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
@@ -27,6 +28,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   animate = true,
   animateWords = false,
   animateWordsOnce = false,
+  revealOnScrollBothDirections = false,
 }) => {
   const reducedMotion = useReducedMotion();
   const sharedReveal = React.useContext(ServiceTextRevealContext);
@@ -53,7 +55,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
     <motion.div
       initial={motionReveal ? { opacity: 0, y: animateWords ? 30 : 14 } : false}
       whileInView={motionReveal ? { opacity: 1, y: 0 } : undefined}
-      viewport={{ once: true, amount: 0.35 }}
+      viewport={{ once: !revealOnScrollBothDirections, amount: 0.35 }}
       transition={{ duration: motionReveal ? (animateWords ? 0.63 : 0.42) : 0, ease: [0.32, 0.72, 0, 1] }}
       className={`max-w-3xl ${
         align === 'center' ? 'text-center mx-auto' : 'text-left'
